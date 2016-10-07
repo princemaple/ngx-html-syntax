@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-name: Angular 2 HTML
+name: Angular2 HTML
 file_extensions:
   - html
 first_line_match: (?i)<(!DOCTYPE\s*)?html
