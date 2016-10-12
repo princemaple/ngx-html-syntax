@@ -437,7 +437,7 @@ contexts:
         3: entity.other.attribute-name.reference.html
 
   tag-input-attribute:
-    - match: '\s+((\[)([a-zA-Z]\w*)(\])(=)\s*)'
+    - match: '\s+((\[)([a-zA-Z][\w.]*)(\])(=)\s*)'
       captures:
         1: meta.attribute-with-value.input.html
         2: punctuation.section.input.begin.html
