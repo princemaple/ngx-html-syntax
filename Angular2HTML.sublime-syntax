@@ -464,6 +464,20 @@ contexts:
         - match: ''
           pop: true
 
+  tag-ng-bindon-attribute:
+    - match: '\s+((\[\()([a-zA-Z][\w.]*)(\)\])(=)\s*)'
+      captures:
+        1: meta.attribute-with-value.bindon.html
+        2: punctuation.section.bindon.begin.html
+        3: entity.other.attribute-name.bindon.html
+        4: punctuation.section.bindon.end.html
+        5: punctuation.separator.key-value.html
+      push:
+        - include: string-double-quoted
+        - include: string-single-quoted
+        - match: ''
+          pop: true
+
   tag-stuff:
     - include: tag-id-attribute
     - include: tag-class-attribute
@@ -473,4 +487,5 @@ contexts:
     - include: tag-ng-reference-attribute
     - include: tag-ng-bind-attribute
     - include: tag-ng-on-attribute
+    - include: tag-ng-bindon-attribute
     - include: tag-generic-attribute
