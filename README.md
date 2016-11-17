@@ -2,7 +2,6 @@
 
 based on the official sublime html syntax
 
-
 ### Features
 
 So that it's not broken when there are
@@ -11,5 +10,6 @@ So that it's not broken when there are
 - `(output)`
 - `#reference`
 - `*template`
+- `[(bananaBox)]`
 
 attributes on the tags
