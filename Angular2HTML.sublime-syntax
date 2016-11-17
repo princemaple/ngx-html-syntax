@@ -416,7 +416,7 @@ contexts:
         - match: ''
           pop: true
 
-  tag-template-attribute:
+  tag-ng-template-attribute:
     - match: '\s+((\*)([a-zA-Z][a-zA-Z0-9-]*)(=)\s*)'
       captures:
         1: meta.attribute-with-value.template.html
@@ -429,20 +429,20 @@ contexts:
         - match: ''
           pop: true
 
-  tag-reference-attribute:
+  tag-ng-reference-attribute:
     - match: '\s+((\#)([a-zA-Z]\w*))\b'
       captures:
         1: meta.attribute.reference.html
         2: punctuation.definition.reference.html
         3: entity.other.attribute-name.reference.html
 
-  tag-input-attribute:
+  tag-ng-bind-attribute:
     - match: '\s+((\[)([a-zA-Z][\w.]*)(\])(=)\s*)'
       captures:
-        1: meta.attribute-with-value.input.html
-        2: punctuation.section.input.begin.html
-        3: entity.other.attribute-name.input.html
-        4: punctuation.section.input.end.html
+        1: meta.attribute-with-value.bind.html
+        2: punctuation.section.bind.begin.html
+        3: entity.other.attribute-name.bind.html
+        4: punctuation.section.bind.end.html
         5: punctuation.separator.key-value.html
       push:
         - include: string-double-quoted
@@ -450,13 +450,13 @@ contexts:
         - match: ''
           pop: true
 
-  tag-output-attribute:
+  tag-ng-on-attribute:
     - match: '\s+((\()([a-zA-Z]\w*)(\))(=)\s*)'
       captures:
-        1: meta.attribute-with-value.output.html
-        2: punctuation.section.output.begin.html
-        3: entity.other.attribute-name.output.html
-        4: punctuation.section.output.end.html
+        1: meta.attribute-with-value.on.html
+        2: punctuation.section.on.begin.html
+        3: entity.other.attribute-name.on.html
+        4: punctuation.section.on.end.html
         5: punctuation.separator.key-value.html
       push:
         - include: string-double-quoted
@@ -469,8 +469,8 @@ contexts:
     - include: tag-class-attribute
     - include: tag-style-attribute
     - include: tag-event-attribute
-    - include: tag-template-attribute
-    - include: tag-reference-attribute
-    - include: tag-input-attribute
-    - include: tag-output-attribute
+    - include: tag-ng-template-attribute
+    - include: tag-ng-reference-attribute
+    - include: tag-ng-bind-attribute
+    - include: tag-ng-on-attribute
     - include: tag-generic-attribute
