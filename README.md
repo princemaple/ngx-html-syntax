@@ -13,3 +13,21 @@ So that it's not broken when there are
 - `[(bananaBox)]`
 
 attributes on the tags
+
+### How to use
+
+I personaly use [ApplySyntax](https://github.com/facelessuser/ApplySyntax) plugin
+with the following setting:
+
+```json
+"syntaxes": [
+    {
+        "syntax": "Angular2HTML/Angular2HTML",
+        "rules": [
+            { "file_path": ".*(?:\\\\|/)[\\w-]+\\.component\\.html$" }
+        ]
+    }
+]
+```
+
+You could use it in other way...
