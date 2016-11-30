@@ -30,4 +30,4 @@ with the following setting:
 ]
 ```
 
-You could use it in other way...
+You could use it in other way... e.g. set it as the default syntax for all html files, since it's a superset of the html syntax anyway.
