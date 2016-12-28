@@ -22,7 +22,7 @@ with the following setting:
 ```json
 "syntaxes": [
     {
-        "syntax": "Angular2HTML/Angular2HTML",
+        "syntax": "Angular2 HTML Syntax/Angular2HTML",
         "rules": [
             { "file_path": ".*(?:\\\\|/)[\\w-]+\\.component\\.html$" }
         ]
