@@ -437,7 +437,7 @@ contexts:
         3: entity.other.attribute-name.reference.html
 
   tag-ng-bind-attribute:
-    - match: '\s+((\[)([a-zA-Z][\w.-]*)(\])(=)\s*)'
+    - match: '\s+((\[)([a-zA-Z@][\w.-]*)(\])(=)\s*)'
       captures:
         1: meta.attribute-with-value.bind.html
         2: punctuation.section.bind.begin.html
