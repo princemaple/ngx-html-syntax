@@ -7,7 +7,9 @@ based on the official sublime html syntax
 So that it's not broken when there are
 
 - `[input]`
+- `[@animation]`
 - `(output)`
+- `(@animation.event)`
 - `#reference`
 - `*template`
 - `[(bananaBox)]`
