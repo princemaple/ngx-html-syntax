@@ -451,7 +451,7 @@ contexts:
           pop: true
 
   tag-ng-on-attribute:
-    - match: '\s+((\()([a-zA-Z][\w:]*)(\))(=)\s*)'
+    - match: '\s+((\()([a-zA-Z@.][\w:]*)(\))(=)\s*)'
       captures:
         1: meta.attribute-with-value.on.html
         2: punctuation.section.on.begin.html
