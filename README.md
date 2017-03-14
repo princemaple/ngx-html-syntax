@@ -25,10 +25,8 @@ with the following setting:
 "syntaxes": [
     {
         "syntax": "Angular2 HTML Syntax/Angular2HTML",
-        "rules": [
-            { "file_path": ".*(?:\\\\|/)[\\w-]+\\.component\\.html$" }
-        ]
-    }
+        "extensions": ["component.html"],
+    },
 ]
 ```
 
