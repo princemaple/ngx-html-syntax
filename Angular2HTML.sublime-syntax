@@ -430,11 +430,24 @@ contexts:
           pop: true
 
   tag-ng-reference-attribute:
-    - match: '\s+((\#)([a-zA-Z]\w*))\b'
+    - match: '\s+((\#)([a-zA-Z]\w*))\s+'
       captures:
         1: meta.attribute.reference.html
         2: punctuation.definition.reference.html
         3: entity.other.attribute-name.reference.html
+
+  tag-ng-reference-assignment-attribute:
+    - match: '\s+((\#)([a-zA-Z]\w*))(=)\s*'
+      captures:
+        1: meta.attribute.reference.html
+        2: punctuation.definition.reference.html
+        3: entity.other.attribute-name.reference.html
+        4: punctuation.separator.key-value.html
+      push:
+        - include: string-double-quoted
+        - include: string-single-quoted
+        - match: ''
+          pop: true
 
   tag-ng-bind-attribute:
     - match: '\s+((\[)([a-zA-Z@][\w.-]*)(\])(=)\s*)'
@@ -485,6 +498,7 @@ contexts:
     - include: tag-event-attribute
     - include: tag-ng-template-attribute
     - include: tag-ng-reference-attribute
+    - include: tag-ng-reference-assignment-attribute
     - include: tag-ng-bind-attribute
     - include: tag-ng-on-attribute
     - include: tag-ng-bindon-attribute
