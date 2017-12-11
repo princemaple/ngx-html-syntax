@@ -1,0 +1,21 @@
+## How to use
+
+The syntax is listed as Ngx HTML in Sublime syntax selection list.
+
+I personaly use ApplySyntax plugin with the following setting:
+
+"syntaxes": [
+    {
+        "syntax": "Angular2 HTML Syntax/Angular2HTML",
+        "extensions": ["component.html"],
+    },
+]
+
+You could use it in other ways...
+e.g. set it as the default syntax for all html files,
+since it's a superset of the html syntax anyway.
+
+Note: the package will eventually be renamed to "Ngx HTML" to be
+consistent with the already renamed syntax name.
+When the time comes, you'd want to change the syntax name in
+ApplySyntax setting to "Ngx HTML/NgxHTML"...
