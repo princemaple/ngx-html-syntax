@@ -27,12 +27,12 @@ contexts:
 
   main:
     - match: '{{'
-      scope: punctuation.section.interpolation.begin.html
-      push:
-        - meta_scope: meta.interpolation.html
-        - match: '}}'
-          scope: punctuation.section.interpolation.end.html
-          pop: true
+      scope: punctuation.section.interpolation.begin.ngx.html
+      embed: scope:source.js
+      embed_scope: meta.interpolation.ngx.html
+      escape: '}}'
+      escape_captures:
+        0: punctuation.section.interpolation.end.ngx.html
     - match: (<\?)(xml)
       captures:
         1: punctuation.definition.tag.begin.html
@@ -480,67 +480,55 @@ contexts:
     - include: else-pop
 
   tag-ng-template-attribute:
-    - match: '\s+((\*)([a-zA-Z]\w*)(=\s*)?)'
+    - match: '(\*)([a-zA-Z]\w*)'
+      scope: meta.attribute-with-value.template.html
       captures:
-        1: meta.attribute-with-value.template.html
-        2: punctuation.definition.template.html
-        3: entity.other.attribute-name.template.html
-        4: punctuation.separator.key-value.html
+        1: punctuation.definition.template.html
+        2: entity.other.attribute-name.template.html
       push:
-        - include: string-double-quoted
-        - include: string-single-quoted
-        - match: ''
-          pop: true
+        - tag-event-attribute-meta
+        - tag-event-attribute-equals
 
   tag-ng-reference-attribute:
-    - match: '\s+((\#)([a-zA-Z]\w*)(=\s*)?)'
+    - match: '(\#)([a-zA-Z]\w*)'
+      scope: meta.attribute.reference.html
       captures:
-        1: meta.attribute.reference.html
-        2: punctuation.definition.reference.html
-        3: entity.other.attribute-name.reference.html
-        4: punctuation.separator.key-value.html
+        1: punctuation.definition.reference.html
+        2: entity.other.attribute-name.reference.html
       push:
-        - include: string-double-quoted
-        - include: string-single-quoted
-        - match: ''
-          pop: true
+        - tag-event-attribute-meta
+        - tag-event-attribute-equals
 
   tag-ng-bind-attribute:
-    - match: '\s+((\[)([a-zA-Z@][\w.-]*)(\])(=)\s*)'
+    - match: '(\[)([a-zA-Z@][\w.-]*)(\])'
+      scope: meta.attribute-with-value.bind.html
       captures:
-        1: meta.attribute-with-value.bind.html
-        2: punctuation.section.bind.begin.html
-        3: entity.other.attribute-name.bind.html
-        4: punctuation.section.bind.end.html
-        5: punctuation.separator.key-value.html
+        1: punctuation.section.bind.begin.html
+        2: entity.other.attribute-name.bind.html
+        3: punctuation.section.bind.end.html
       push:
-        - include: string-double-quoted
-        - include: string-single-quoted
-        - match: ''
-          pop: true
+        - tag-event-attribute-meta
+        - tag-event-attribute-equals
 
   tag-ng-on-attribute:
-    - match: '\s+((\()([a-zA-Z@][\w:.]*)(\))(=)\s*)'
+    - match: '(\()([a-zA-Z@][\w:.]*)(\))'
+      scope: meta.attribute-with-value.on.html
       captures:
-        1: meta.attribute-with-value.on.html
-        2: punctuation.section.on.begin.html
-        3: entity.other.attribute-name.on.html
-        4: punctuation.section.on.end.html
-        5: punctuation.separator.key-value.html
+        1: punctuation.section.on.begin.html
+        2: entity.other.attribute-name.on.html
+        3: punctuation.section.on.end.html
       push:
-        - include: string-double-quoted
-        - include: string-single-quoted
-        - match: ''
-          pop: true
+        - tag-event-attribute-meta
+        - tag-event-attribute-equals
 
   tag-ng-bindon-attribute:
-    - match: '\s+((\[\()([a-zA-Z][\w.]*)(\)\])(=)\s*)'
+    - match: '(\[\()([a-zA-Z][\w.]*)(\)\])(=)\s*'
+      scope: meta.attribute-with-value.bindon.html
       captures:
-        1: meta.attribute-with-value.bindon.html
-        2: punctuation.section.bindon.begin.html
-        3: entity.other.attribute-name.bindon.html
-        4: punctuation.section.bindon.end.html
-        5: punctuation.separator.key-value.html
+        1: punctuation.section.bindon.begin.html
+        2: entity.other.attribute-name.bindon.html
+        3: punctuation.section.bindon.end.html
+        4: punctuation.separator.key-value.html
       push:
         - include: string-double-quoted
         - include: string-single-quoted
