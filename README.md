@@ -2,7 +2,7 @@
 
 based on the official sublime html syntax
 
-### Features
+## Features
 
 So that it's not broken when there are
 
@@ -16,7 +16,15 @@ So that it's not broken when there are
 
 attributes on the tags
 
-### How to use
+## Plus
+
+Highlighting the JS part as JS. So,
+
+- in `*ngFor="let column of columns"` you should see `let` and `of` highlighted as keywords
+- in `(change)="update()"` you should see `update` as function name
+- in `a && b` you should see `&&` correctly highlighted as the JS operator instead of an error you would see in normal HTML syntax.
+
+## How to use
 
 The syntax is listed as `Ngx HTML` in Sublime syntax selection list.
 
@@ -35,7 +43,7 @@ with the following setting:
 You could use it in other way...
 e.g. set it as the default syntax for all html files, since it's a superset of the html syntax anyway.
 
-### Package name
+## Package name
 
 The package was created during the Angular 2 time, hence the name.
 I will eventually rename it to `Ngx` in package control.
