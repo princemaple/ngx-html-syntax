@@ -25,6 +25,7 @@ Highlighting the JS part as JS. So,
 - in `*ngFor="let column of columns"`, you should see `let` and `of` highlighted as keywords
 - in `(change)="update()"`, you should see `update` as function name
 - in `a && b` within an Angular expression, you should see `&&` correctly highlighted as the JS operator instead of an error you would see in normal HTML syntax.
+- in `{{1 + 2}}` interpolations, you should see JS syntax highlighting as well
 
 ## How to use
 
