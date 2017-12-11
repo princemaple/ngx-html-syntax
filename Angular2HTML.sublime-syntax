@@ -17,6 +17,15 @@ variables:
   not_equals_lookahead: (?=\s*[^\s=])
 
 contexts:
+  interpolation:
+    - match: '{{'
+      scope: punctuation.section.interpolation.begin.ngx.html
+      embed: scope:source.js
+      embed_scope: meta.interpolation.ngx.html
+      escape: '}}'
+      escape_captures:
+        0: punctuation.section.interpolation.end.ngx.html
+
   immediately-pop:
     - match: ''
       pop: true
@@ -26,13 +35,7 @@ contexts:
       pop: true
 
   main:
-    - match: '{{'
-      scope: punctuation.section.interpolation.begin.ngx.html
-      embed: scope:source.js
-      embed_scope: meta.interpolation.ngx.html
-      escape: '}}'
-      escape_captures:
-        0: punctuation.section.interpolation.end.ngx.html
+    - include: interpolation
     - match: (<\?)(xml)
       captures:
         1: punctuation.definition.tag.begin.html
@@ -303,6 +306,7 @@ contexts:
         - match: '"'
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: "'"
       scope: punctuation.definition.string.begin.html
@@ -311,6 +315,7 @@ contexts:
         - match: "'"
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: '{{unquoted_attribute_value}}'
       scope: string.unquoted.html
@@ -343,6 +348,7 @@ contexts:
         - match: '"'
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: "'"
       scope: punctuation.definition.string.begin.html
@@ -352,6 +358,7 @@ contexts:
         - match: "'"
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: '{{unquoted_attribute_value}}'
       scope: string.unquoted.html meta.class-name.html
@@ -384,6 +391,7 @@ contexts:
         - match: '"'
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: "'"
       scope: punctuation.definition.string.begin.html
@@ -393,6 +401,7 @@ contexts:
         - match: "'"
           scope: punctuation.definition.string.end.html
           pop: true
+        - include: interpolation
         - include: attribute-entities
     - match: '{{unquoted_attribute_value}}'
       scope: string.unquoted.html meta.toc-list.id.html
