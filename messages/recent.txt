@@ -1,0 +1,4 @@
+0.5.x:
+------
+
+  Added highlighting of JS expressions where appropriate
