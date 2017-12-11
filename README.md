@@ -20,6 +20,8 @@ attributes on the tags
 
 Highlighting the JS part as JS. So,
 
+- in `[myBinding]="myVar"` you should see `myVar` as an JS variable instead of string content
+    - i.e. `myVar` should be highlighted differently from `"`s
 - in `*ngFor="let column of columns"` you should see `let` and `of` highlighted as keywords
 - in `(change)="update()"` you should see `update` as function name
 - in `a && b` you should see `&&` correctly highlighted as the JS operator instead of an error you would see in normal HTML syntax.
