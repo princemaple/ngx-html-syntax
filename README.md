@@ -1,4 +1,4 @@
-# Ngx/Angular2 HTML Syntax for SublimeText
+# Ngx (Angular2+) HTML Syntax for SublimeText
 
 based on the official sublime html syntax
 
@@ -37,7 +37,7 @@ with the following setting:
 ```json
 "syntaxes": [
     {
-        "syntax": "Angular2 HTML Syntax/Angular2HTML",
+        "syntax": "Ngx HTML/NgxHTML",
         "extensions": ["component.html"],
     },
 ]
@@ -45,8 +45,3 @@ with the following setting:
 
 You could use it in other ways...
 e.g. set it as the default syntax for all html files, since it's a superset of the html syntax anyway.
-
-## Package name
-
-The package was created during the Angular 2 time, hence the name.
-I will eventually rename it to `Ngx HTML` in package control. [PR sent](https://github.com/wbond/package_control_channel/pull/6779)
