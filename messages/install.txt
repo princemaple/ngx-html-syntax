@@ -6,7 +6,7 @@ I personaly use ApplySyntax plugin with the following setting:
 
 "syntaxes": [
     {
-        "syntax": "Angular2 HTML Syntax/Angular2HTML",
+        "syntax": "Ngx HTML/NgxHTML",
         "extensions": ["component.html"],
     },
 ]
@@ -15,7 +15,6 @@ You could use it in other ways...
 e.g. set it as the default syntax for all html files,
 since it's a superset of the html syntax anyway.
 
-Note: the package will eventually be renamed to "Ngx HTML" to be
-consistent with the already renamed syntax name.
-When the time comes, you'd want to change the syntax name in
-ApplySyntax setting to "Ngx HTML/NgxHTML"...
+Note: the package was named "Angular2 HTML Syntax/Angular2HTML",
+if you had ApplySyntax settings from earlier, you may want to update
+it. Have fun!
