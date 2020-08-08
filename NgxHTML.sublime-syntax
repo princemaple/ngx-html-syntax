@@ -2,15 +2,8 @@
 ---
 name: Ngx HTML
 file_extensions:
-  - html
-  - htm
-  - shtml
-  - xhtml
-  - inc
-  - tmpl
-  - tpl
-first_line_match: (?i)<(!DOCTYPE\s*)?html
-scope: text.html.basic
+  - component.html
+scope: text.html.ngx
 
 variables:
   unquoted_attribute_value: (?:[^\s<>/''"]|/(?!>))+
