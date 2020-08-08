@@ -3,7 +3,6 @@
 name: Ngx HTML
 file_extensions:
   - component.html
-first_line_match: (?i)<(!DOCTYPE\s*)?html
 scope: text.html.ngx
 
 variables:
