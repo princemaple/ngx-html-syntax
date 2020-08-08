@@ -2,13 +2,7 @@
 ---
 name: Ngx HTML
 file_extensions:
-  - html
-  - htm
-  - shtml
-  - xhtml
-  - inc
-  - tmpl
-  - tpl
+  - component.html
 first_line_match: (?i)<(!DOCTYPE\s*)?html
 scope: text.html.basic
 
