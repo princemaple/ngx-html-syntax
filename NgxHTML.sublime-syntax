@@ -73,13 +73,12 @@ contexts:
         - tag-event-attribute-equals
 
   tag-ng-bindon-attribute:
-    - match: '(\[\()([a-zA-Z][\w.]*)(\)\])(=)\s*'
+    - match: '(\[\()([a-zA-Z][\w.]*)(\)\])\s*'
       scope: meta.attribute-with-value.bindon.html
       captures:
         1: punctuation.section.bindon.begin.html
         2: entity.other.attribute-name.bindon.html
         3: punctuation.section.bindon.end.html
-        4: punctuation.separator.key-value.html
       push:
         - tag-event-attribute-meta
         - tag-event-attribute-equals
