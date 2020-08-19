@@ -38,7 +38,7 @@ contexts:
         2: entity.other.attribute-name.template.html
       push:
         - tag-event-attribute-meta
-        - tag-event-attribute-equals
+        - tag-event-attribute-assignment
 
   tag-ng-reference-attribute:
     - match: '(\#)([a-zA-Z]\w*)'
@@ -48,7 +48,7 @@ contexts:
         2: entity.other.attribute-name.reference.html
       push:
         - tag-event-attribute-meta
-        - tag-event-attribute-equals
+        - tag-event-attribute-assignment
 
   tag-ng-bind-attribute:
     - match: '(\[)([a-zA-Z@][\w.-]*)(\])'
@@ -59,7 +59,7 @@ contexts:
         3: punctuation.section.bind.end.html
       push:
         - tag-event-attribute-meta
-        - tag-event-attribute-equals
+        - tag-event-attribute-assignment
 
   tag-ng-on-attribute:
     - match: '(\()([a-zA-Z@][\w:.]*)(\))'
@@ -70,7 +70,7 @@ contexts:
         3: punctuation.section.on.end.html
       push:
         - tag-event-attribute-meta
-        - tag-event-attribute-equals
+        - tag-event-attribute-assignment
 
   tag-ng-bindon-attribute:
     - match: '(\[\()([a-zA-Z][\w.]*)(\)\])\s*'
@@ -81,4 +81,4 @@ contexts:
         3: punctuation.section.bindon.end.html
       push:
         - tag-event-attribute-meta
-        - tag-event-attribute-equals
+        - tag-event-attribute-assignment
