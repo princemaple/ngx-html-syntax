@@ -51,7 +51,7 @@ contexts:
         - tag-event-attribute-assignment
 
   tag-ng-bind-attribute:
-    - match: '(\[)([a-zA-Z@][\w.-]*)(\])'
+    - match: '(\[)([a-zA-Z@][!\w.-]*)(\])'
       scope: meta.attribute-with-value.bind.html
       captures:
         1: punctuation.section.bind.begin.html
