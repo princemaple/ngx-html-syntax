@@ -8,10 +8,17 @@ version: 2
 
 extends: Packages/HTML/HTML.sublime-syntax
 
+variables:
+  angular-blocks: |-
+    \b(?xi:
+      for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading
+    )\b(?=\{)
+
 contexts:
   main:
     - meta_prepend: true
     - include: interpolation
+    - include: angular-blocks
 
   interpolation:
     - match: '{{'
@@ -82,3 +89,17 @@ contexts:
       push:
         - tag-event-attribute-meta
         - tag-event-attribute-assignment
+  
+  angular-blocks:
+    - match: (@)(?:{{angular-blocks}})
+      scope: keyword.control.control-flow.html
+      captures:
+        1: punctuation.definition.keyword.html
+      push:
+        - match: \{
+          scope: punctuation.section.block.control-flow.begin.html
+          push:
+            - include: main
+            - match: \}
+              scope: punctuation.section.block.control-flow.end.html
+              pop: true
