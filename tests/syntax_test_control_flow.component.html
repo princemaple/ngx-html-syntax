@@ -1,0 +1,92 @@
+<!-- Angular v17 Blog examples -->
+
+@if (loggedIn) {
+  The user is logged in
+} @else {
+  The user is not logged in
+}
+
+@switch (accessLevel) {
+  @case ('admin') {
+    <admin-dashboard />
+  }
+  @case ('moderator') {
+    <moderator-dashboard />
+  }
+  @default {
+    <user-dashboard />
+  }
+}
+
+@for (user of users; track user.id) {
+  {{ user.name }}
+} @empty {
+  Empty list of users
+}
+
+@defer {
+  <comment-list />
+}
+
+@defer (on viewport) {
+  <comment-list />
+} @placeholder {
+  <!-- A placeholder content to show until the comments load -->
+  <img src="comments-placeholder.png" />
+}
+
+@defer (on viewport) {
+  <comment-list />
+} @loading {
+  Loading…
+} @error {
+  Loading failed :(
+} @placeholder {
+  <img src="comments-placeholder.png" />
+}
+
+@defer (on viewport; prefetch on idle) {
+  <comment-list />
+}
+
+<!-- Examples Provided by @thecodechef -->
+
+@for (item of items) {
+  <a [href]="item.link">{{ item.title }}</a>
+}
+
+@for (item of items) {
+  <a [href]="item.link">{{ item.title }}</a>
+} @empty {
+  <p>No Items</p>
+}
+
+@if (users$ | async; as users) {
+  {{ users.length }}
+}
+
+@switch (condition) {
+  @case (caseA) {
+    Case A.
+  }
+  @case (caseB) {
+    Case B.
+  }
+  @default {
+    Default case.
+  }
+}
+
+@defer (on <trigger>; when <condition>; prefetch on <trigger>; prefetch when <condition>) {
+  <!-- deferred template fragment -->
+  <calendar-cmp />
+} @placeholder (minimum? <duration>) {
+  <!-- placeholder template fragment -->
+  <p>Placeholder</p>
+} @loading (minimum? <duration>; after? <duration>) {
+  <!-- loading template fragment -->
+  <img alt="loading image" src="loading.gif" />
+} @error {
+  <!-- error template fragment -->
+  <p>An loading error occured</p>
+}

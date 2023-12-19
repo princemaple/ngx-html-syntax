@@ -1,0 +1,16 @@
+name: Syntax Tests
+
+on: [push, pull_request]
+
+jobs:
+  st4_syntax_tests:
+    name: Run ST4 Syntax Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: SublimeText/syntax-test-action@v2
+        with:
+          build: 4152
+          default_packages: v4152
+          package_name: Ngx HTML
