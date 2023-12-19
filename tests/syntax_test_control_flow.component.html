@@ -1,11 +1,21 @@
 <!-- SYNTAX TEST "NgxHTML.sublime-syntax" -->
 
-<!-- Angular v17 Blog examples -->
-
 @if (loggedIn) {
   The user is logged in
 } @else {
   The user is not logged in
+}
+
+@if (a > b) {
+  {{ a }} is greater than {{ b }}
+}
+
+@if (a > b) {
+  {{ a }} is greater than {{ b }}
+} @else if (b > a) {
+  {{ a }} is less than {{ b }}
+} @else {
+  {{ a }} is equal to {{ b }}
 }
 
 @switch (accessLevel) {
@@ -51,7 +61,9 @@
   <comment-list />
 }
 
-<!-- Examples Provided by @thecodechef -->
+@for (item of items; track item.id; let idx = $index, e = $even) {
+  Item #{{ idx }}: {{ item.name }}
+}
 
 @for (item of items) {
   <a [href]="item.link">{{ item.title }}</a>
@@ -63,8 +75,18 @@
   <p>No Items</p>
 }
 
+@for (item of items; track item.name) {
+  <li>{{ item.name }}</li>
+} @empty {
+  <li>There are no items.</li>
+}
+
 @if (users$ | async; as users) {
   {{ users.length }}
+}
+
+@for (item of items; track item.id) {
+  {{ item.name }}
 }
 
 @switch (condition) {
