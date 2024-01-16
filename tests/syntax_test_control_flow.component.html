@@ -1,10 +1,22 @@
 <!-- SYNTAX TEST "NgxHTML.sublime-syntax" -->
 
 @if (loggedIn) {
+<!-- <- punctuation.definition.keyword.html -->
+ <!-- <- keyword.control.control-flow.html -->
+  <!-- <- keyword.control.control-flow.html -->
+          <!-- ^ punctuation.section.block.begin.html -->
   The user is logged in
 } @else {
+<!-- <- punctuation.section.block.end.html -->
+   <!-- ^ punctuation.section.block.begin.html -->
+  <!-- <- punctuation.definition.keyword.html -->
+   <!-- <- keyword.control.control-flow.html -->
+    <!-- <- keyword.control.control-flow.html -->
+     <!-- <- keyword.control.control-flow.html -->
+      <!-- <- keyword.control.control-flow.html -->
   The user is not logged in
 }
+<!-- <- punctuation.section.block.end.html -->
 
 @if (a > b) {
   {{ a }} is greater than {{ b }}
