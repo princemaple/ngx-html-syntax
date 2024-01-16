@@ -27,6 +27,48 @@ Highlighting the JS part as JS. So,
 - in `a && b` within an Angular expression, you should see `&&` correctly highlighted as the JS operator instead of an error you would see in normal HTML syntax.
 - in `{{1 + 2}}` interpolations, you should see JS syntax highlighting as well
 
+## And...
+
+Now it supports Angular control flow.
+
+```
+@for (item of items) {
+  <a [href]="item.link">{{item.title}}</a>
+} @empty {
+  <p>No Items</p>
+}
+```
+
+```
+@if (users$ | async; as users) {
+  {{ users.length }}
+}
+```
+
+```
+@if (a > b) {
+  {{a}} is greater than {{b}}
+} @else if (b > a) {
+  {{a}} is less than {{b}}
+} @else {
+  {{a}} is equal to {{b}}
+}
+```
+
+```
+@switch (condition) {
+  @case (caseA) {
+    Case A.
+  }
+  @case (caseB) {
+    Case B.
+  }
+  @default {
+    Default case.
+  }
+}
+```
+
 ## How to use
 
 The syntax is listed as `Ngx HTML` in Sublime syntax selection list.
