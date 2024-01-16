@@ -19,8 +19,11 @@
 <!-- <- punctuation.section.block.end.html -->
 
 @if (a > b) {
-<!-- <- punctuation.section.block.end.html -->
   {{ a }} is greater than {{ b }}
+  <!-- <- punctuation.section.interpolation.begin.ngx.html -->
+   <!-- <- punctuation.section.interpolation.begin.ngx.html -->
+       <!-- <- punctuation.section.interpolation.end.ngx.html -->
+        <!-- <- punctuation.section.interpolation.end.ngx.html -->
 }
 
 @if (a > b) {
@@ -34,6 +37,10 @@
 @switch (accessLevel) {
   @case ('admin') {
     <admin-dashboard />
+<!-- ^^^^^^^^^^^^^^^ entity.name.tag.other.html -->
+    <!-- <- punctuation.definition.tag.begin.html -->
+                     <!-- <- punctuation.definition.tag.end.html -->
+                      <!-- <- punctuation.definition.tag.end.html -->
   }
   @case ('moderator') {
     <moderator-dashboard />
