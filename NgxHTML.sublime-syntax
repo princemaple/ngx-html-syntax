@@ -93,26 +93,27 @@ contexts:
       scope: keyword.control.control-flow.html
       captures:
         1: punctuation.definition.keyword.html
-    - match: \(
-      scope: punctuation.section.group.begin.html
       push:
-        - meta_scope: meta.group.html
-        - match: \b(async)\b
-          scope: keyword.control.html
-        - match: \b(track|of|prefetch on|on|prefetch when|when|as)\b
-          scope: keyword.operator.word.html
-        - match: \b(minimum|after)\b(\?)
-          captures:
-            1: keyword.operator.word.html
-            2: keyword.control.question.html
-        - match: \)
-          scope: punctuation.section.group.end.html
-          pop: 1
-    - match: \{
-      scope: punctuation.section.block.begin.html
-      push:
-        - meta_scope: meta.block.html
-        - include: main
-        - match: \}
-          scope: punctuation.section.block.end.html
-          pop: 1
+        - match: \{
+          scope: punctuation.section.block.begin.html
+          push:
+            - meta_scope: meta.block.html
+            - include: main
+            - match: \}
+              scope: punctuation.section.block.end.html
+              pop: 2
+        - match: \(
+          scope: punctuation.section.group.begin.html
+          push:
+            - meta_scope: meta.group.html
+            - match: \b(async)\b
+              scope: keyword.control.html
+            - match: \b(track|of|prefetch on|on|prefetch when|when|as)\b
+              scope: keyword.operator.word.html
+            - match: \b(minimum|after)\b(\?)
+              captures:
+                1: keyword.operator.word.html
+                2: keyword.control.question.html
+            - match: \)
+              scope: punctuation.section.group.end.html
+              pop: 1

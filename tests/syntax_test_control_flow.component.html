@@ -1,0 +1,136 @@
+<!-- SYNTAX TEST "NgxHTML.sublime-syntax" -->
+
+@if (loggedIn) {
+<!-- <- punctuation.definition.keyword.html -->
+ <!-- <- keyword.control.control-flow.html -->
+  <!-- <- keyword.control.control-flow.html -->
+          <!-- ^ punctuation.section.block.begin.html -->
+  The user is logged in
+} @else {
+<!-- <- punctuation.section.block.end.html -->
+   <!-- ^ punctuation.section.block.begin.html -->
+  <!-- <- punctuation.definition.keyword.html -->
+   <!-- <- keyword.control.control-flow.html -->
+    <!-- <- keyword.control.control-flow.html -->
+     <!-- <- keyword.control.control-flow.html -->
+      <!-- <- keyword.control.control-flow.html -->
+  The user is not logged in
+}
+<!-- <- punctuation.section.block.end.html -->
+
+@if (a > b) {
+  {{ a }} is greater than {{ b }}
+  <!-- <- punctuation.section.interpolation.begin.ngx.html -->
+   <!-- <- punctuation.section.interpolation.begin.ngx.html -->
+       <!-- <- punctuation.section.interpolation.end.ngx.html -->
+        <!-- <- punctuation.section.interpolation.end.ngx.html -->
+}
+
+@if (a > b) {
+  {{ a }} is greater than {{ b }}
+} @else if (b > a) {
+  {{ a }} is less than {{ b }}
+} @else {
+  {{ a }} is equal to {{ b }}
+}
+
+@switch (accessLevel) {
+  @case ('admin') {
+    <admin-dashboard />
+<!-- ^^^^^^^^^^^^^^^ entity.name.tag.other.html -->
+    <!-- <- punctuation.definition.tag.begin.html -->
+                     <!-- <- punctuation.definition.tag.end.html -->
+                      <!-- <- punctuation.definition.tag.end.html -->
+  }
+  @case ('moderator') {
+    <moderator-dashboard />
+  }
+  @default {
+    <user-dashboard />
+  }
+}
+
+@for (user of users; track user.id) {
+  {{ user.name }}
+} @empty {
+  Empty list of users
+}
+
+@defer {
+  <comment-list />
+}
+
+@defer (on viewport) {
+  <comment-list />
+} @placeholder {
+  <!-- A placeholder content to show until the comments load -->
+  <img src="comments-placeholder.png" />
+}
+
+@defer (on viewport) {
+  <comment-list />
+} @loading {
+  Loading…
+} @error {
+  Loading failed :(
+} @placeholder {
+  <img src="comments-placeholder.png" />
+}
+
+@defer (on viewport; prefetch on idle) {
+  <comment-list />
+}
+
+@for (item of items; track item.id; let idx = $index, e = $even) {
+  Item #{{ idx }}: {{ item.name }}
+}
+
+@for (item of items) {
+  <a [href]="item.link">{{ item.title }}</a>
+}
+
+@for (item of items) {
+  <a [href]="item.link">{{ item.title }}</a>
+} @empty {
+  <p>No Items</p>
+}
+
+@for (item of items; track item.name) {
+  <li>{{ item.name }}</li>
+} @empty {
+  <li>There are no items.</li>
+}
+
+@if (users$ | async; as users) {
+  {{ users.length }}
+}
+
+@for (item of items; track item.id) {
+  {{ item.name }}
+}
+
+@switch (condition) {
+  @case (caseA) {
+    Case A.
+  }
+  @case (caseB) {
+    Case B.
+  }
+  @default {
+    Default case.
+  }
+}
+
+@defer (on <trigger>; when <condition>; prefetch on <trigger>; prefetch when <condition>) {
+  <!-- deferred template fragment -->
+  <calendar-cmp />
+} @placeholder (minimum? <duration>) {
+  <!-- placeholder template fragment -->
+  <p>Placeholder</p>
+} @loading (minimum? <duration>; after? <duration>) {
+  <!-- loading template fragment -->
+  <img alt="loading image" src="loading.gif" />
+} @error {
+  <!-- error template fragment -->
+  <p>An loading error occured</p>
+}
