@@ -9,13 +9,13 @@ version: 2
 extends: Packages/HTML/HTML.sublime-syntax
 
 variables:
-  angular_blocks: (?<=\@)\b(?xi:for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading)\b
+  angular_blocks: (?<=\@)\b(?xi:for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading | let)\b
 
 contexts:
   main:
     - meta_prepend: true
     - include: interpolation
-    - include: angular-blocks
+    - include: ng-control-flow
 
   interpolation:
     - match: '{{'
@@ -88,12 +88,19 @@ contexts:
         - tag-event-attribute-assignment
 
 
-  angular-blocks:
+  ng-control-flow:
     - match: '(@){{angular_blocks}}'
       scope: keyword.control.control-flow.html
       captures:
         1: punctuation.definition.keyword.html
       push:
+        - match: '='
+          scope: punctuation.section.let.begin.ngx.html
+          push:
+            - meta_scope: meta.let.ngx.html
+            - match: ';'
+              scope: punctuation.section.let.end.ngx.html
+              pop: 2
         - match: \{
           scope: punctuation.section.block.begin.html
           push:

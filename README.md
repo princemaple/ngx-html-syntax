@@ -32,6 +32,10 @@ Highlighting the JS part as JS. So,
 Now it supports Angular control flow.
 
 ```
+@let myVar = myObservable | async;
+```
+
+```
 @for (item of items) {
   <a [href]="item.link">{{item.title}}</a>
 } @empty {
