@@ -19,12 +19,12 @@ contexts:
 
   interpolation:
     - match: '{{'
-      scope: punctuation.section.interpolation.begin.ngx.html
+      scope: meta.interpolation.ngx.html punctuation.section.interpolation.begin.ngx.html
       embed: scope:source.js
-      embed_scope: meta.interpolation.ngx.html
+      embed_scope: meta.interpolation.ngx.html source.js.embedded.ngx.html
       escape: '}}'
       escape_captures:
-        0: punctuation.section.interpolation.end.ngx.html
+        0: meta.interpolation.ngx.html punctuation.section.interpolation.end.ngx.html
 
   tag-attributes:
     - meta_prepend: true
