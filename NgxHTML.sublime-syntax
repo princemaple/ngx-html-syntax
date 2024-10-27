@@ -9,7 +9,7 @@ version: 2
 extends: Packages/HTML/HTML.sublime-syntax
 
 variables:
-  angular_blocks: (?<=\@)\b(?xi:for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading | let)\b
+  angular_blocks: (?xi:for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading | let)\b
 
 contexts:
   main:
