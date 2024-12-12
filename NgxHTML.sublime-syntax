@@ -1,30 +1,39 @@
 %YAML 1.2
 ---
 name: Ngx HTML
-file_extensions:
-  - component.html
 scope: text.html.ngx
 version: 2
 
 extends: Packages/HTML/HTML.sublime-syntax
 
+file_extensions:
+  - component.html
+
 variables:
-  angular_blocks: (?xi:for | if | else | else if | switch | case | empty | placeholder | defer | default | error | loading | let)\b
+
+  bin_digit: '[01_]'
+  oct_digit: '[0-7_]'
+  dec_digit: '[0-9_]'
+  hex_digit: '[\h_]'
+  dec_integer: (?:0|[1-9]{{dec_digit}}*)
+  dec_exponent: '[Ee](?:[-+]|(?![-+])){{dec_digit}}*'
+
+  # JavaScript identifier
+  ident_name: (?:{{ident_start}}{{ident_part}}*{{ident_break}})
+  ident_break: (?!{{ident_part}})
+  ident_escape: (?:\\u(?:\h{4}|\{\h+\}))
+  ident_start: (?:[_$\p{L}\p{Nl}]|{{ident_escape}})
+  ident_part: (?:[_$\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]|{{ident_escape}})
 
 contexts:
-  main:
-    - meta_prepend: true
-    - include: interpolation
-    - include: ng-control-flow
 
-  interpolation:
-    - match: '{{'
-      scope: meta.interpolation.ngx.html punctuation.section.interpolation.begin.ngx.html
-      embed: scope:source.js
-      embed_scope: meta.interpolation.ngx.html source.js.embedded.ngx.html
-      escape: '}}'
-      escape_captures:
-        0: meta.interpolation.ngx.html punctuation.section.interpolation.end.ngx.html
+###[ HTML CUSTOMIZATIONS ]#####################################################
+
+  tag:
+    - meta_prepend: true
+    - include: ng-declarations
+    - include: ng-statements
+    - include: ng-interpolations
 
   tag-attributes:
     - meta_prepend: true
@@ -34,8 +43,25 @@ contexts:
     - include: tag-ng-on-attribute
     - include: tag-ng-bindon-attribute
 
+###[ ANGULAR EXPRESSIONS ]#####################################################
+
+  ng-expressions:
+    # https://angular.dev/guide/templates/expression-syntax
+    - include: ng-arrays
+    - include: ng-groups
+    - include: ng-objects
+    - include: ng-function-calls
+    - include: ng-filters
+    - include: ng-operators
+    - include: ng-constants
+    - include: ng-numbers
+    - include: ng-strings
+    - include: ng-variables
+
+###[ ANGULAR TAG ATTRIBUTES ]##################################################
+
   tag-ng-template-attribute:
-    - match: '(\*)([a-zA-Z]\w*)'
+    - match: (\*)([a-zA-Z]\w*)
       scope: meta.attribute-with-value.template.html
       captures:
         1: punctuation.definition.template.html
@@ -45,7 +71,7 @@ contexts:
         - tag-event-attribute-assignment
 
   tag-ng-reference-attribute:
-    - match: '(\#)([a-zA-Z]\w*)'
+    - match: (\#)([a-zA-Z]\w*)
       scope: meta.attribute.reference.html
       captures:
         1: punctuation.definition.reference.html
@@ -55,7 +81,7 @@ contexts:
         - tag-event-attribute-assignment
 
   tag-ng-bind-attribute:
-    - match: '(\[)([a-zA-Z@][!\w.-]*)(\])'
+    - match: (\[)([a-zA-Z@][!\w.-]*)(\])
       scope: meta.attribute-with-value.bind.html
       captures:
         1: punctuation.section.bind.begin.html
@@ -66,7 +92,7 @@ contexts:
         - tag-event-attribute-assignment
 
   tag-ng-on-attribute:
-    - match: '(\()([a-zA-Z@][\w:.]*)(\))'
+    - match: (\()([a-zA-Z@][\w:.]*)(\))
       scope: meta.attribute-with-value.on.html
       captures:
         1: punctuation.section.on.begin.html
@@ -77,7 +103,7 @@ contexts:
         - tag-event-attribute-assignment
 
   tag-ng-bindon-attribute:
-    - match: '(\[\()([a-zA-Z][\w.]*)(\)\])\s*'
+    - match: (\[\()([a-zA-Z][\w.]*)(\)\])
       scope: meta.attribute-with-value.bindon.html
       captures:
         1: punctuation.section.bindon.begin.html
@@ -87,40 +113,471 @@ contexts:
         - tag-event-attribute-meta
         - tag-event-attribute-assignment
 
+###[ ANGULAR DECLARATIONS ]####################################################
 
-  ng-control-flow:
-    - match: '(@){{angular_blocks}}'
-      scope: keyword.control.control-flow.html
+  ng-declarations:
+    - match: (@)let{{ident_break}}
+      scope: meta.let.ngx keyword.declaration.variable.ngx
       captures:
-        1: punctuation.definition.keyword.html
+        1: punctuation.definition.keyword.ngx
       push:
-        - match: '='
-          scope: punctuation.section.let.begin.ngx.html
-          push:
-            - meta_scope: meta.let.ngx.html
-            - match: ';'
-              scope: punctuation.section.let.end.ngx.html
-              pop: 2
-        - match: \{
-          scope: punctuation.section.block.begin.html
-          push:
-            - meta_scope: meta.block.html
-            - include: main
-            - match: \}
-              scope: punctuation.section.block.end.html
-              pop: 2
-        - match: \(
-          scope: punctuation.section.group.begin.html
-          push:
-            - meta_scope: meta.group.html
-            - match: \b(async)\b
-              scope: keyword.control.html
-            - match: \b(track|of|prefetch on|on|prefetch when|when|as)\b
-              scope: keyword.operator.word.html
-            - match: \b(minimum|after)\b(\?)
-              captures:
-                1: keyword.operator.word.html
-                2: keyword.control.question.html
-            - match: \)
-              scope: punctuation.section.group.end.html
-              pop: 1
+        - ng-let-assignment
+        - ng-let-variable
+
+  ng-let-variable:
+    - match: '{{ident_name}}'
+      scope: variable.other.readwrite.ngx
+      pop: 1
+    - include: else-pop
+
+  ng-let-assignment:
+    - meta_content_scope: meta.let.identifier.ngx
+    - match: =
+      scope: meta.let.ngx keyword.operator.assignment.ngx
+      set: ng-let-value
+    - include: else-pop
+
+  ng-let-value:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.let.value.ngx
+    - match: ';'
+      scope: punctuation.terminator.expression.ngx
+      pop: 1
+    - include: ng-expressions
+
+###[ ANGULAR STATEMENTS ]######################################################
+
+  ng-statements:
+    # conditionals
+    # https://angular.dev/guide/templates/control-flow#conditionally-display-content-with-if-else-if-and-else
+    - match: (@)if{{ident_break}}
+      scope: keyword.control.conditional.if.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-conditional-group
+    - match: (@)else\s+if{{ident_break}}
+      scope: keyword.control.conditional.elseif.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-conditional-group
+    - match: (@)else{{ident_break}}
+      scope: keyword.control.conditional.else.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push: ng-block
+    # https://angular.dev/guide/templates/control-flow#conditionally-display-content-with-the-switch-block
+    - match: (@)case{{ident_break}}
+      scope: keyword.control.conditional.case.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-conditional-group
+    - match: (@)default{{ident_break}}
+      scope: keyword.control.conditional.case.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push: ng-block
+    - match: (@)switch{{ident_break}}
+      scope: keyword.control.conditional.switch.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-conditional-group
+    # https://angular.dev/guide/templates/control-flow#providing-a-fallback-for-for-blocks-with-the-empty-block
+    - match: (@)for{{ident_break}}
+      scope: keyword.control.loop.for.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-for-group
+    - match: (@)empty{{ident_break}}
+      scope: keyword.control.loop.else.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push: ng-block
+    # https://angular.dev/guide/templates/defer
+    - match: (@)(?:defer|error|loading|placeholder){{ident_break}}
+      scope: keyword.control.flow.ngx
+      captures:
+        1: punctuation.definition.keyword.ngx
+      push:
+        - ng-block
+        - ng-defer-group
+
+  ng-block:
+    - meta_include_prototype: false
+    - match: \{
+      scope: punctuation.section.block.begin.ngx
+      set: ng-block-body
+    - include: else-pop
+
+  ng-block-body:
+    - meta_scope: meta.block.ngx
+    - match: \}
+      scope: punctuation.section.block.end.ngx
+      pop: 1
+    - include: main
+
+  ng-conditional-group:
+    - meta_include_prototype: false
+    - match: \(
+      scope: punctuation.section.group.begin.ngx
+      set: ng-conditional-group-body
+    - include: else-pop
+
+  ng-conditional-group-body:
+    - meta_scope: meta.group.ngx
+    - match: \)
+      scope: punctuation.section.group.end.ngx
+      pop: 1
+    - match: as{{ident_break}}
+      scope: keyword.operator.assignment.as.ngx
+    - include: ng-expressions
+
+  ng-defer-group:
+    - meta_include_prototype: false
+    - match: \(
+      scope: punctuation.section.group.begin.ngx
+      set: ng-defer-group-body
+    - include: else-pop
+
+  ng-defer-group-body:
+    - meta_scope: meta.group.ngx
+    - match: \)
+      scope: punctuation.section.group.end.ngx
+      pop: 1
+    - match: (?:idle|viewport|interaction|hover|immediatetimer){{ident_break}}
+      scope: constant.language.event.ngx
+    - match: (?:prefetch on|on|prefetch when|when){{ident_break}}
+      scope: keyword.control.flow.ngx
+    - match: (minimum|after)(\?)
+      captures:
+        1: keyword.operator.word.ngx
+        2: keyword.control.question.ngx
+    - include: ng-expressions
+
+  ng-for-group:
+    - meta_include_prototype: false
+    - match: \(
+      scope: punctuation.section.group.begin.ngx
+      set: ng-for-group-body
+    - include: else-pop
+
+  ng-for-group-body:
+    - meta_scope: meta.group.ngx
+    - match: \)
+      scope: punctuation.section.group.end.ngx
+      pop: 1
+    - match: track{{ident_break}}
+      scope: keyword.control.flow.ngx
+    - match: let{{ident_break}}
+      scope: keyword.declation.variable.ngx
+    - match: of{{ident_break}}
+      scope: keyword.operator.iteration.ngx
+    - include: ng-expressions
+
+###[ ANGULAR INTERPOLATIONS ]##################################################
+
+  ng-interpolations:
+    - match: '{{'
+      scope: meta.embedded.ngx.html punctuation.section.embedded.begin.ngx.html
+      push: ng-interpolation-body
+
+  ng-interpolation-body:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.embedded.ngx.html source.ngx.embedded.html
+    - match: '}}'
+      scope: meta.embedded.ngx.html punctuation.section.embedded.end.ngx.html
+      pop: 1
+    - include: ng-expressions
+
+###[ ANGULAR ARRAYS ]###########################################################
+
+  ng-arrays:
+    - match: \[
+      scope: punctuation.section.sequence.begin.ngx
+      push: ng-array-body
+
+  ng-array-body:
+    - meta_scope: meta.sequence.array.ngx
+    - match: \]
+      scope: punctuation.section.sequence.end.ngx
+      pop: 1
+    - include: ng-expressions
+
+###[ ANGULAR GROUPS ]##########################################################
+
+  ng-groups:
+    - match: \(
+      scope: punctuation.section.group.begin.ngx
+      push: ng-group-body
+
+  ng-group-body:
+    - meta_scope: meta.group.ngx
+    - match: \)
+      scope: punctuation.section.group.end.ngx
+      pop: 1
+    - include: ng-expressions
+
+###[ ANGULAR OBJECTS ]#########################################################
+
+  ng-objects:
+    - match: \{
+      scope: meta.mapping.ngx punctuation.section.mapping.begin.ngx
+      push: ng-object-body
+
+  ng-object-body:
+    - meta_content_scope: meta.mapping.ngx
+    - match: \}
+      scope: meta.mapping.ngx punctuation.section.mapping.end.ngx
+      pop: 1
+    - match: ','
+      scope: punctuation.separator.mapping.pair.ngx
+    - match: ':'
+      scope: meta.mapping.ngx punctuation.separator.mapping.key-value.ngx
+      set: ng-object-value
+    - match: (?=\S)
+      set: ng-object-key
+
+  ng-object-key:
+    - meta_include_prototype: false
+    - match: '{{ident_name}}(?=\s*:)'
+      scope: meta.mapping.key.ngx meta.string.ngx string.unquoted.ngx
+      set: ng-object-body
+    - match: ''
+      set: ng-object-key-expression
+
+  ng-object-key-expression:
+    - meta_content_scope: meta.mapping.key.ngx
+    - match: (?=[,:}])
+      set: ng-object-body
+    - include: ng-block-pop
+    - include: ng-expressions
+
+  ng-object-value:
+    - meta_content_scope: meta.mapping.value.ngx
+    - match: (?=[,:}])
+      set: ng-object-body
+    - include: ng-block-pop
+    - include: ng-expressions
+
+###[ ANGULAR FILTERS ]#########################################################
+
+  ng-filters:
+    - match: \|(?!\|)
+      scope: keyword.operator.assignment.pipe.ngx
+      push:
+        - ng-filter-meta
+        - ng-filter-function
+
+  ng-filter-function:
+    - match: (({{ident_name}})\s*)(\()
+      captures:
+        1: meta.function-call.identifier.ngx
+        2: variable.function.filter.ngx
+        3: meta.function-call.arguments.ngx punctuation.section.arguments.begin.ngx
+      set: ng-function-call-arguments
+    - match: '{{ident_name}}'
+      scope: meta.function-call.identifier.ngx variable.function.filter.ngx
+      pop: 1
+    - include: else-pop
+
+  ng-filter-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.filter.ngx
+    - include: immediately-pop
+
+###[ ANGULAR FUNCTION CALLS ]##################################################
+
+  ng-function-calls:
+    - match: (({{ident_name}})\s*)(\()
+      captures:
+        1: meta.function-call.identifier.ngx
+        2: variable.function.ngx
+        3: meta.function-call.arguments.ngx punctuation.section.arguments.begin.ngx
+      push: ng-function-call-arguments
+
+  ng-function-call-arguments:
+    - meta_content_scope: meta.function-call.arguments.ngx
+    - match: \)
+      scope: meta.function-call.arguments.ngx punctuation.section.arguments.end.ngx
+      pop: 1
+    - match: ','
+      scope: punctuation.separator.arguments.ngx
+    - include: ng-expressions
+
+###[ ANGULAR OPERATORS ]#######################################################
+
+  ng-operators:
+    # https://angular.dev/guide/templates/expression-syntax#what-operators-are-supported
+    - match: ','
+      scope: punctuation.separator.sequence.ngx
+    - match: ';'
+      scope: punctuation.terminator.expression.ngx
+    - match: '[!=]==?|[<>]=?'
+      scope: keyword.operator.comparison.ngx
+    - match: '[-+*/%]'
+      scope: keyword.operator.arithmetic.ngx
+    - match: '&&|\|\||!'
+      scope: keyword.operator.logical.ngx
+    - match: '='
+      scope: keyword.operator.assignment.ngx
+    - match: \?\?
+      scope: keyword.operator.null-coalescing.ngx
+    - match: '\?'
+      scope: keyword.operator.ternary.ngx
+      push: ng-ternary-expression
+
+  ng-ternary-expression:
+    - match: ':'
+      scope: keyword.operator.ternary.ngx
+      pop: 1
+    - include: ng-block-pop
+    - include: ng-expressions
+
+###[ ANGULAR LITERALS ]########################################################
+
+  ng-constants:
+    - match: true{{ident_break}}
+      scope: constant.language.boolean.true.ngx
+    - match: false{{ident_break}}
+      scope: constant.language.boolean.false.ngx
+    - match: null{{ident_break}}
+      scope: constant.language.null.ngx
+    - match: undefined{{ident_break}}
+      scope: constant.language.undefined.ngx
+
+  ng-numbers:
+    # floats
+    - match: |-
+        (?x:
+          # 1., 1.1, 1.1e1, 1.1e-1, 1.e1, 1.e-1 | 1e1, 1e-1
+          {{dec_integer}} (?: (\.) {{dec_digit}}* (?:{{dec_exponent}})? | {{dec_exponent}} )
+          # .1, .1e1, .1e-1
+          | (\.) {{dec_digit}}+ (?:{{dec_exponent}})?
+        ){{ident_break}}
+      scope: meta.number.float.decimal.ngx constant.numeric.value.ngx
+      captures:
+        1: punctuation.separator.decimal.ngx
+        2: punctuation.separator.decimal.ngx
+    # integers
+    - match: (0)({{dec_digit}}+){{ident_break}}
+      scope: meta.number.integer.octal.ngx
+      captures:
+        1: constant.numeric.base.ngx invalid.deprecated.numeric.octal.ngx
+        2: constant.numeric.value.ngx invalid.deprecated.numeric.octal.ngx
+    - match: (0[Xx])({{hex_digit}}*)(n)?{{ident_break}}
+      scope: meta.number.integer.hexadecimal.ngx
+      captures:
+        1: constant.numeric.base.ngx
+        2: constant.numeric.value.ngx
+        3: constant.numeric.suffix.ngx
+    - match: (0[Oo])({{oct_digit}}*)(n)?{{ident_break}}
+      scope: meta.number.integer.octal.ngx
+      captures:
+        1: constant.numeric.base.ngx
+        2: constant.numeric.value.ngx
+        3: constant.numeric.suffix.ngx
+    - match: (0[Bb])({{bin_digit}}*)(n)?{{ident_break}}
+      scope: meta.number.integer.binary.ngx
+      captures:
+        1: constant.numeric.base.ngx
+        2: constant.numeric.value.ngx
+        3: constant.numeric.suffix.ngx
+    - match: ({{dec_integer}})(n|(?!\.)){{ident_break}}
+      scope: meta.number.integer.decimal.ngx
+      captures:
+        1: constant.numeric.value.ngx
+        2: constant.numeric.suffix.ngx
+
+  ng-strings:
+    - match: \"
+      scope: punctuation.definition.string.begin.ngx
+      push: ng-double-quoted-string-body
+    - match: \'
+      scope: punctuation.definition.string.begin.ngx
+      push: ng-single-quoted-string-body
+
+  ng-double-quoted-string-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.ngx string.quoted.double.ngx
+    - match: \"
+      scope: punctuation.definition.string.end.ngx
+      pop: 1
+    - match: \n
+      scope: invalid.illegal.newline.ngx
+      pop: 1
+    - include: ng-string-content
+
+  ng-single-quoted-string-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.ngx string.quoted.single.ngx
+    - match: \'
+      scope: punctuation.definition.string.end.ngx
+      pop: 1
+    - match: \n
+      scope: invalid.illegal.newline.ngx
+      pop: 1
+    - include: ng-string-content
+
+  ng-string-content:
+    - match: \\x\h{2}
+      scope: constant.character.escape.hex.ngx
+    - match: \\u\h{4}
+      scope: constant.character.escape.unicode.16bit.ngx
+    - match: \\.
+      scope: constant.character.escape.ngx
+
+###[ ANGULAR VARIABLES ]#######################################################
+
+  ng-variables:
+    - match: ({{ident_name}})\s*(\??\.)
+      captures:
+        1: variable.other.object.ngx
+        2: punctuation.accessor.ngx
+      push: ng-members
+    - match: '{{ident_name}}'
+      scope: variable.other.readwrite.ngx
+      push: ng-subscription
+
+  ng-members:
+    - match: ({{ident_name}})\s*(\??\.)
+      captures:
+        1: variable.other.object.ngx
+        2: punctuation.accessor.ngx
+    - match: (({{ident_name}})\s*)(\()
+      captures:
+        1: meta.function-call.identifier.ngx
+        2: variable.function.ngx
+        3: meta.function-call.arguments.ngx punctuation.section.arguments.begin.ngx
+      set: ng-function-call-arguments
+    - match: '{{ident_name}}'
+      scope: variable.other.member.ngx
+      set: ng-subscription
+    - include: else-pop
+
+  ng-subscription:
+    - match: \[
+      scope: punctuation.section.subscription.begin.ngx
+      push: ng-subscription-body
+    - include: else-pop
+
+  ng-subscription-body:
+    - meta_scope: meta.subscription.ngx
+    - match: \]
+      scope: punctuation.section.subscription.end.ngx
+      pop: 1
+    - include: ng-expressions
+
+###[ ANGULAR PROTOTYPES ]######################################################
+
+  ng-block-pop:
+    - match: (?=[)}])
+      pop: 1
