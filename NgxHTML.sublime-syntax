@@ -25,6 +25,8 @@ variables:
   ident_start: (?:[_$\p{L}\p{Nl}]|{{ident_escape}})
   ident_part: (?:[_$\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]|{{ident_escape}})
 
+  dot_accessor: (?:\??\.(?!\.))
+
 contexts:
 
 ###[ HTML CUSTOMIZATIONS ]#####################################################
@@ -431,7 +433,7 @@ contexts:
       scope: keyword.operator.assignment.ngx
     - match: \?\?
       scope: keyword.operator.null-coalescing.ngx
-    - match: '\?'
+    - match: \?(?!\.)
       scope: keyword.operator.ternary.ngx
       push: ng-ternary-expression
 
@@ -538,46 +540,108 @@ contexts:
 ###[ ANGULAR VARIABLES ]#######################################################
 
   ng-variables:
-    - match: ({{ident_name}})\s*(\??\.)
-      captures:
-        1: variable.other.object.ngx
-        2: punctuation.accessor.ngx
-      push: ng-members
+    - match: (?={{ident_start}})
+      branch_point: ng-variable
+      branch:
+        - ng-unqualified-variable
+        - ng-qualified-variable
+    - match: '{{dot_accessor}}'
+      scope: punctuation.accessor.ngx
+      push:
+        - ng-accessor
+        - ng-member
+
+  ng-unqualified-variable:
+    - meta_include_prototype: false
     - match: '{{ident_name}}'
       scope: variable.other.readwrite.ngx
-      push: ng-subscription
+      set:
+        - ng-variable-check
+        - ng-subscription
+    - include: immediately-pop
 
-  ng-members:
-    - match: ({{ident_name}})\s*(\??\.)
+  ng-variable-check:
+    - match: (?={{dot_accessor}})
+      fail: ng-variable
+    - include: else-pop
+
+  ng-qualified-variable:
+    - meta_include_prototype: false
+    - match: '{{ident_name}}'
+      scope: variable.other.object.ngx
+      set:
+        - ng-accessor
+        - ng-subscription
+    - include: immediately-pop
+
+  ng-accessor:
+    - meta_include_prototype: false
+    - meta_scope: meta.path.ngx
+    - match: \s*({{dot_accessor}})
       captures:
-        1: variable.other.object.ngx
-        2: punctuation.accessor.ngx
+        1: punctuation.accessor.ngx
+      push: ng-member
+    - match: (?=\s*\S)
+      pop: 1
+
+  ng-member:
     - match: (({{ident_name}})\s*)(\()
       captures:
         1: meta.function-call.identifier.ngx
-        2: variable.function.ngx
+        2: variable.function.method.ngx
         3: meta.function-call.arguments.ngx punctuation.section.arguments.begin.ngx
-      set: ng-function-call-arguments
-    - match: '{{ident_name}}'
-      scope: variable.other.member.ngx
+      set:
+        - ng-subscription
+        - ng-function-call-arguments
+    - match: (?=[$#]?{{ident_start}})
+      branch_point: ng-property
+      branch:
+        - ng-property
+        - ng-object
+      pop: 1
+    - include: ng-subscription
+
+  ng-object:
+    - match: ([$#]?){{ident_name}}
+      scope: variable.other.object.ngx
+      captures:
+        1: punctuation.definition.variable.ngx
       set: ng-subscription
-    - include: else-pop
+    - include: immediately-pop
+
+  ng-property:
+    - match: ([$#]?){{ident_name}}
+      scope: variable.other.member.ngx
+      captures:
+        1: punctuation.definition.variable.ngx
+      set:
+        - ng-property-check
+        - ng-subscription
+    - include: immediately-pop
+
+  ng-property-check:
+    - match: (?=\s*{{dot_accessor}})
+      fail: ng-property
+    - match: (?=\s*\S)
+      pop: 1
 
   ng-subscription:
-    - match: \[
-      scope: punctuation.section.subscription.begin.ngx
-      push: ng-subscription-body
-    - include: else-pop
+    - match: \s*(\[)
+      captures:
+        1: meta.subscription.ngx punctuation.section.subscription.begin.ngx
+      set: ng-subscription-body
+    - match: (?=\s*\S)
+      pop: 1
 
   ng-subscription-body:
-    - meta_scope: meta.subscription.ngx
+    - meta_content_scope: meta.subscription.ngx
     - match: \]
-      scope: punctuation.section.subscription.end.ngx
-      pop: 1
+      scope: meta.subscription.ngx punctuation.section.subscription.end.ngx
+      set: ng-subscription
     - include: ng-expressions
 
 ###[ ANGULAR PROTOTYPES ]######################################################
 
   ng-block-pop:
-    - match: (?=[)}])
+    - match: (?=[;)}])
       pop: 1
