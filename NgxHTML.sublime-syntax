@@ -42,21 +42,6 @@ contexts:
     - meta_prepend: true
     - include: ng-directives
 
-###[ ANGULAR EXPRESSIONS ]#####################################################
-
-  ng-expressions:
-    # https://angular.dev/guide/templates/expression-syntax
-    - include: ng-arrays
-    - include: ng-groups
-    - include: ng-objects
-    - include: ng-function-calls
-    - include: ng-filters
-    - include: ng-operators
-    - include: ng-constants
-    - include: ng-numbers
-    - include: ng-strings
-    - include: ng-variables
-
 ###[ ANGULAR DIRECTIVES ]######################################################
 
   ng-directives:
@@ -341,7 +326,22 @@ contexts:
       pop: 1
     - include: ng-expressions
 
-###[ ANGULAR ARRAYS ]###########################################################
+###[ ANGULAR EXPRESSIONS ]#####################################################
+
+  ng-expressions:
+    # https://angular.dev/guide/templates/expression-syntax
+    - include: ng-arrays
+    - include: ng-groups
+    - include: ng-objects
+    - include: ng-function-calls
+    - include: ng-filters
+    - include: ng-operators
+    - include: ng-constants
+    - include: ng-numbers
+    - include: ng-strings
+    - include: ng-variables
+
+###[ ANGULAR ARRAYS ]##########################################################
 
   ng-arrays:
     - match: \[
