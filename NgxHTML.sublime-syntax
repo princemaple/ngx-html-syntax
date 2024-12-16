@@ -40,11 +40,7 @@ contexts:
 
   tag-attributes:
     - meta_prepend: true
-    - include: tag-ng-template-attribute
-    - include: tag-ng-reference-attribute
-    - include: tag-ng-bind-attribute
-    - include: tag-ng-on-attribute
-    - include: tag-ng-bindon-attribute
+    - include: ng-directives
 
 ###[ ANGULAR EXPRESSIONS ]#####################################################
 
@@ -61,60 +57,91 @@ contexts:
     - include: ng-strings
     - include: ng-variables
 
-###[ ANGULAR TAG ATTRIBUTES ]##################################################
+###[ ANGULAR DIRECTIVES ]######################################################
 
-  tag-ng-template-attribute:
-    - match: (\*)([a-zA-Z]\w*)
-      scope: meta.attribute-with-value.template.html
+  ng-directives:
+    # template
+    - match: (\*)(?:(ngIf)|(ngFor)|(ngSwitch(?:Case|Default))|([a-zA-Z]\w*))
+      scope: meta.directive.template.ngx
       captures:
-        1: punctuation.definition.template.html
-        2: entity.other.attribute-name.template.html
-      push:
-        - tag-event-attribute-meta
-        - tag-event-attribute-assignment
-
-  tag-ng-reference-attribute:
+        1: punctuation.definition.template.ngx
+        2: keyword.control.conditional.if.ngx
+        3: keyword.control.loop.for.ngx
+        4: keyword.control.conditional.case.ngx
+        5: entity.other.attribute-name.template.ngx
+      push: ng-directive-assignment
+    # reference
     - match: (\#)([a-zA-Z]\w*)
-      scope: meta.attribute.reference.html
+      scope: meta.directive.reference.ngx
       captures:
-        1: punctuation.definition.reference.html
-        2: entity.other.attribute-name.reference.html
-      push:
-        - tag-event-attribute-meta
-        - tag-event-attribute-assignment
-
-  tag-ng-bind-attribute:
-    - match: (\[)([a-zA-Z@][!\w.-]*)(\])
-      scope: meta.attribute-with-value.bind.html
+        1: punctuation.definition.reference.ngx
+        2: entity.other.attribute-name.reference.ngx
+      push: ng-directive-assignment
+    # bind
+    - match: (\[)(?:(ngSwitch)|([a-zA-Z@][!\w.-]*))(\])
+      scope: meta.directive.bind.ngx
       captures:
-        1: punctuation.section.bind.begin.html
-        2: entity.other.attribute-name.bind.html
-        3: punctuation.section.bind.end.html
-      push:
-        - tag-event-attribute-meta
-        - tag-event-attribute-assignment
-
-  tag-ng-on-attribute:
+        1: punctuation.definition.bind.begin.ngx
+        2: keyword.control.conditional.switch.ngx
+        3: entity.other.attribute-name.bind.ngx
+        4: punctuation.definition.bind.end.ngx
+      push: ng-directive-assignment
+    # on
     - match: (\()([a-zA-Z@][\w:.]*)(\))
-      scope: meta.attribute-with-value.on.html
+      scope: meta.directive.on.ngx
       captures:
-        1: punctuation.section.on.begin.html
-        2: entity.other.attribute-name.on.html
-        3: punctuation.section.on.end.html
-      push:
-        - tag-event-attribute-meta
-        - tag-event-attribute-assignment
-
-  tag-ng-bindon-attribute:
+        1: punctuation.definition.on.begin.ngx
+        2: entity.other.attribute-name.on.ngx
+        3: punctuation.definition.on.end.ngx
+      push: ng-directive-assignment
+    # bindon
     - match: (\[\()([a-zA-Z][\w.]*)(\)\])
-      scope: meta.attribute-with-value.bindon.html
+      scope: meta.directive.bindon.ngx
       captures:
-        1: punctuation.section.bindon.begin.html
-        2: entity.other.attribute-name.bindon.html
-        3: punctuation.section.bindon.end.html
-      push:
-        - tag-event-attribute-meta
-        - tag-event-attribute-assignment
+        1: punctuation.definition.bindon.begin.ngx
+        2: entity.other.attribute-name.bindon.ngx
+        3: punctuation.definition.bindon.end.ngx
+      push: ng-directive-assignment
+
+  ng-directive-assignment:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.directive.ngx
+    - match: =
+      scope: meta.directive.ngx punctuation.separator.key-value.ngx
+      set:
+        - immediately-pop  # workaround https://github.com/sublimehq/sublime_text/issues/4069
+        - ng-directive-value
+    - include: else-pop
+
+  ng-directive-value:
+    - meta_content_scope: meta.directive.value.ngx
+    - match: \"
+      scope: meta.string.ngx string.quoted.double.ngx punctuation.definition.string.begin.ngx
+      embed: ng-directive-expressions
+      embed_scope: meta.directive.value.ngx meta.string.ngx meta.interpolation.ngx source.ngx.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.ngx string.quoted.double.ngx punctuation.definition.string.end.ngx
+      pop: 1
+    - match: \'
+      scope: meta.string.ngx string.quoted.single.ngx punctuation.definition.string.begin.ngx
+      embed: ng-directive-expressions
+      embed_scope: meta.directive.value.ngx meta.string.ngx meta.interpolation.ngx source.ngx.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.ngx string.quoted.single.ngx punctuation.definition.string.end.ngx
+      pop: 1
+    - include: else-pop
+
+  ng-directive-expressions:
+    - match: (trackBy)\s*(:)
+      captures:
+        1: keyword.control.flow.ngx
+        2: punctuation.separator.key-value.ngx
+    - include: ng-conditional-keywords
+    - include: ng-defer-keywords
+    - include: ng-for-keywords
+    - include: ng-expressions
 
 ###[ ANGULAR DECLARATIONS ]####################################################
 
@@ -240,9 +267,12 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.ngx
       pop: 1
+    - include: ng-conditional-keywords
+    - include: ng-expressions
+
+  ng-conditional-keywords:
     - match: as{{ident_break}}
       scope: keyword.operator.assignment.as.ngx
-    - include: ng-expressions
 
   ng-defer-group:
     - meta_include_prototype: false
@@ -256,15 +286,22 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.ngx
       pop: 1
-    - match: (?:idle|viewport|interaction|hover|immediatetimer){{ident_break}}
-      scope: constant.language.event.ngx
+    - include: ng-defer-keywords
+    - include: ng-expressions
+
+  ng-defer-keywords:
     - match: (?:prefetch on|on|prefetch when|when){{ident_break}}
       scope: keyword.control.flow.ngx
+      push: ng-defer-event
     - match: (minimum|after)(\?)
       captures:
         1: keyword.operator.word.ngx
         2: keyword.control.question.ngx
-    - include: ng-expressions
+
+  ng-defer-event:
+    - match: (?:idle|viewport|interaction|hover|immediatetimer){{ident_break}}
+      scope: constant.language.event.ngx
+    - include: else-pop
 
   ng-for-group:
     - meta_include_prototype: false
@@ -278,13 +315,16 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.ngx
       pop: 1
+    - include: ng-for-keywords
+    - include: ng-expressions
+
+  ng-for-keywords:
     - match: track{{ident_break}}
       scope: keyword.control.flow.ngx
     - match: let{{ident_break}}
       scope: keyword.declation.variable.ngx
     - match: of{{ident_break}}
       scope: keyword.operator.iteration.ngx
-    - include: ng-expressions
 
 ###[ ANGULAR INTERPOLATIONS ]##################################################
 

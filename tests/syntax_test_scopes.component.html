@@ -740,3 +740,282 @@
 <!--                                    ^ punctuation.definition.string.end.ngx -->
 <!--                                     ^ punctuation.section.arguments.end.ngx -->
 <!--                                       ^^ punctuation.section.embedded.end.ngx.html -->
+
+
+<!--
+ Binding dynamic text, properties and attributes
+ https://v18.angular.dev/guide/templates/binding#binding-dynamic-properties-and-attributes
+ -->
+
+<div [input]="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^ meta.directive.bind.ngx -->
+<!--        ^ meta.directive.ngx -->
+<!--         ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.bind.begin.ngx -->
+<!--  ^^^^^ entity.other.attribute-name.bind.ngx -->
+<!--       ^ punctuation.definition.bind.end.ngx -->
+<!--        ^ punctuation.separator.key-value.ngx -->
+<!--         ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--          ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--          ^^^ variable.other.readwrite.ngx -->
+<!--              ^ keyword.operator.arithmetic.ngx -->
+<!--                ^^^ variable.other.readwrite.ngx -->
+<!--                    ^ keyword.operator.arithmetic.ngx -->
+<!--                      ^^^ variable.other.readwrite.ngx -->
+<!--                         ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                           ^ punctuation.definition.tag.end.html -->
+
+<div [@animation]="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^^^ meta.directive.bind.ngx -->
+<!--             ^ meta.directive.ngx -->
+<!--              ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.bind.begin.ngx -->
+<!--  ^^^^^^^^^^ entity.other.attribute-name.bind.ngx -->
+<!--            ^ punctuation.definition.bind.end.ngx -->
+<!--             ^ punctuation.separator.key-value.ngx -->
+<!--              ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--               ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--               ^^^ variable.other.readwrite.ngx -->
+<!--                   ^ keyword.operator.arithmetic.ngx -->
+<!--                     ^^^ variable.other.readwrite.ngx -->
+<!--                         ^ keyword.operator.arithmetic.ngx -->
+<!--                           ^^^ variable.other.readwrite.ngx -->
+<!--                              ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                ^ punctuation.definition.tag.end.html -->
+
+
+<!--
+ Adding event listeners
+ https://v18.angular.dev/guide/templates/event-listeners
+ -->
+
+<div (output)="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^ meta.directive.on.ngx -->
+<!--         ^ meta.directive.ngx -->
+<!--          ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.on.begin.ngx -->
+<!--  ^^^^^^ entity.other.attribute-name.on.ngx -->
+<!--        ^ punctuation.definition.on.end.ngx -->
+<!--         ^ punctuation.separator.key-value.ngx -->
+<!--          ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--           ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--           ^^^ variable.other.readwrite.ngx -->
+<!--               ^ keyword.operator.arithmetic.ngx -->
+<!--                 ^^^ variable.other.readwrite.ngx -->
+<!--                     ^ keyword.operator.arithmetic.ngx -->
+<!--                       ^^^ variable.other.readwrite.ngx -->
+<!--                          ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                            ^ punctuation.definition.tag.end.html -->
+
+<div (@animation.event)="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^^^^^^^^^ meta.directive.on.ngx -->
+<!--                   ^ meta.directive.ngx -->
+<!--                    ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.on.begin.ngx -->
+<!--  ^^^^^^^^^^^^^^^^ entity.other.attribute-name.on.ngx -->
+<!--                  ^ punctuation.definition.on.end.ngx -->
+<!--                   ^ punctuation.separator.key-value.ngx -->
+<!--                    ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--                     ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--                     ^^^ variable.other.readwrite.ngx -->
+<!--                         ^ keyword.operator.arithmetic.ngx -->
+<!--                           ^^^ variable.other.readwrite.ngx -->
+<!--                               ^ keyword.operator.arithmetic.ngx -->
+<!--                                 ^^^ variable.other.readwrite.ngx -->
+<!--                                    ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                      ^ punctuation.definition.tag.end.html -->
+
+
+<!--
+ Two-way binding
+ https://v18.angular.dev/guide/templates/two-way-binding
+ -->
+
+<div [(bananaBox)]="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^^^^ meta.directive.bindon.ngx -->
+<!--              ^ meta.directive.ngx -->
+<!--               ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^^ punctuation.definition.bindon.begin.ngx -->
+<!--   ^^^^^^^^^ entity.other.attribute-name.bindon.ngx -->
+<!--            ^^ punctuation.definition.bindon.end.ngx -->
+<!--              ^ punctuation.separator.key-value.ngx -->
+<!--               ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--                ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--                ^^^ variable.other.readwrite.ngx -->
+<!--                    ^ keyword.operator.arithmetic.ngx -->
+<!--                      ^^^ variable.other.readwrite.ngx -->
+<!--                          ^ keyword.operator.arithmetic.ngx -->
+<!--                            ^^^ variable.other.readwrite.ngx -->
+<!--                               ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                 ^ punctuation.definition.tag.end.html -->
+
+<!--
+ Template reference variables
+ https://v18.angular.dev/guide/templates/variables#template-reference-variables
+ -->
+
+<div #reference="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^ meta.directive.reference.ngx -->
+<!--           ^ meta.directive.ngx -->
+<!--            ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.reference.ngx -->
+<!--  ^^^^^^^^^ entity.other.attribute-name.reference.ngx -->
+<!--           ^ punctuation.separator.key-value.ngx -->
+<!--            ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--             ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--             ^^^ variable.other.readwrite.ngx -->
+<!--                 ^ keyword.operator.arithmetic.ngx -->
+<!--                   ^^^ variable.other.readwrite.ngx -->
+<!--                       ^ keyword.operator.arithmetic.ngx -->
+<!--                         ^^^ variable.other.readwrite.ngx -->
+<!--                            ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                              ^ punctuation.definition.tag.end.html -->
+
+
+<!--
+ structural directives
+ https://v18.angular.dev/guide/directives/structural-directives
+ -->
+
+<div *template="exp + res / ion" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^ meta.directive.template.ngx -->
+<!--          ^ meta.directive.ngx -->
+<!--           ^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.template.ngx -->
+<!--  ^^^^^^^^ entity.other.attribute-name.template.ngx -->
+<!--          ^ punctuation.separator.key-value.ngx -->
+<!--           ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--            ^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html - string -->
+<!--            ^^^ variable.other.readwrite.ngx -->
+<!--                ^ keyword.operator.arithmetic.ngx -->
+<!--                  ^^^ variable.other.readwrite.ngx -->
+<!--                      ^ keyword.operator.arithmetic.ngx -->
+<!--                        ^^^ variable.other.readwrite.ngx -->
+<!--                           ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                             ^ punctuation.definition.tag.end.html -->
+
+
+<!--
+ Built-in structural directives
+ https://v18.angular.dev/guide/directives#built-in-structural-directives
+ -->
+
+<div *ngIf="hero = true" >
+<!--^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^ meta.directive.template.ngx -->
+<!--      ^ meta.directive.ngx -->
+<!--       ^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.template.ngx -->
+<!--  ^^^^ keyword.control.conditional.if.ngx -->
+<!--      ^ punctuation.separator.key-value.ngx -->
+<!--       ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--        ^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html -->
+<!--        ^^^^ variable.other.readwrite.ngx -->
+<!--             ^ keyword.operator.assignment.ngx -->
+<!--               ^^^^ constant.language.boolean.true.ngx -->
+<!--                   ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                     ^ punctuation.definition.tag.end.html -->
+
+<div *ngFor="let column of columns" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^ meta.directive.template.ngx -->
+<!--       ^ meta.directive.ngx -->
+<!--        ^^^^^^^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.template.ngx -->
+<!--  ^^^^^ keyword.control.loop.for.ngx -->
+<!--       ^ punctuation.separator.key-value.ngx -->
+<!--        ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--         ^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html -->
+<!--         ^^^ keyword.declation.variable.ngx -->
+<!--             ^^^^^^ variable.other.readwrite.ngx -->
+<!--                    ^^ keyword.operator.iteration.ngx -->
+<!--                       ^^^^^^^ variable.other.readwrite.ngx -->
+<!--                              ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                ^ punctuation.definition.tag.end.html -->
+
+<div *ngFor="let item of items; trackBy: trackByItems"> ({{ item.id }}) {{ item.name }} </div>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^ meta.directive.template.ngx -->
+<!--       ^ meta.directive.ngx -->
+<!--        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.template.ngx -->
+<!--  ^^^^^ keyword.control.loop.for.ngx -->
+<!--       ^ punctuation.separator.key-value.ngx -->
+<!--        ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html -->
+<!--         ^^^ keyword.declation.variable.ngx -->
+<!--             ^^^^ variable.other.readwrite.ngx -->
+<!--                  ^^ keyword.operator.iteration.ngx -->
+<!--                     ^^^^^ variable.other.readwrite.ngx -->
+<!--                          ^ punctuation.terminator.expression.ngx -->
+<!--                            ^^^^^^^ keyword.control.flow.ngx -->
+<!--                                   ^ punctuation.separator.key-value.ngx -->
+<!--                                     ^^^^^^^^^^^^ variable.other.readwrite.ngx -->
+<!--                                                 ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                                  ^ punctuation.definition.tag.end.html -->
+
+<div [ngSwitch]="currentItem.feature">
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^ meta.directive.bind.ngx -->
+<!--           ^ meta.directive.ngx -->
+<!--            ^^^^^^^^^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.bind.begin.ngx -->
+<!--  ^^^^^^^^ keyword.control.conditional.switch.ngx -->
+<!--          ^ punctuation.definition.bind.end.ngx -->
+<!--           ^ punctuation.separator.key-value.ngx -->
+<!--            ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--             ^^^^^^^^^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html meta.path.ngx -->
+<!--             ^^^^^^^^^^^ variable.other.object.ngx -->
+<!--                        ^ punctuation.accessor.ngx -->
+<!--                         ^^^^^^^ variable.other.member.ngx -->
+<!--                                ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                 ^ punctuation.definition.tag.end.html -->
+
+<app-stout-item *ngSwitchCase="'stout'" [item]="currentItem" />
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.other.html -->
+<!--            ^^^^^^^^^^^^^ meta.directive.template.ngx -->
+<!--                         ^ meta.directive.ngx -->
+<!--                          ^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!--            ^ punctuation.definition.template.ngx -->
+<!--             ^^^^^^^^^^^^ keyword.control.conditional.case.ngx -->
+<!--                         ^ punctuation.separator.key-value.ngx -->
+<!--                          ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--                           ^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html meta.string.ngx string.quoted.single.ngx -->
+<!--                           ^ punctuation.definition.string.begin.ngx -->
+<!--                                 ^ punctuation.definition.string.end.ngx -->
+<!--                                  ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                    ^^^^^^ meta.directive.bind.ngx -->
+<!--                                    ^ punctuation.definition.bind.begin.ngx -->
+<!--                                     ^^^^ entity.other.attribute-name.bind.ngx -->
+<!--                                         ^ punctuation.definition.bind.end.ngx -->
+<!--                                          ^ meta.directive.ngx -->
+<!--                                          ^ punctuation.separator.key-value.ngx -->
+<!--                                           ^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!--                                           ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--                                            ^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--                                                       ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                                         ^^ punctuation.definition.tag.end.html -->
+
+<app-unknown-item *ngSwitchDefault [item]="currentItem" />
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.other.html -->
+<!--              ^^^^^^^^^^^^^^^^ meta.directive.template.ngx -->
+<!--              ^ punctuation.definition.template.ngx -->
+<!--               ^^^^^^^^^^^^^^^ keyword.control.conditional.case.ngx -->
+<!--                               ^^^^^^ meta.directive.bind.ngx -->
+<!--                               ^ punctuation.definition.bind.begin.ngx -->
+<!--                                ^^^^ entity.other.attribute-name.bind.ngx -->
+<!--                                    ^ punctuation.definition.bind.end.ngx -->
+<!--                                     ^ meta.directive.ngx -->
+<!--                                     ^ punctuation.separator.key-value.ngx -->
+<!--                                      ^^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!--                                      ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--                                       ^^^^^^^^^^^ meta.interpolation.ngx source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--                                                  ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                                                    ^^ punctuation.definition.tag.end.html -->
