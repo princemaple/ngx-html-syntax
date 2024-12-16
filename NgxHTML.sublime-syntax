@@ -40,6 +40,23 @@ contexts:
     - meta_prepend: true
     - include: ng-string-interpolations
 
+###[ HTML STYLE TAG ]##########################################################
+
+  style-css-content:
+    - meta_include_prototype: false
+    - match: '{{style_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.embedded.ngx
+      embed_scope: source.css.embedded.html
+      escape: '{{style_content_end}}'
+      escape_captures:
+        1: source.css.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.css.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
 ###[ HTML STYLE ATTRIBUTES ]###################################################
 
   tag-style-attribute-assignment:

@@ -743,6 +743,29 @@
 
 
 <!--
+ Interpolation in inline styles
+ -->
+
+<style>
+    #{{id}} {
+        {{prop}}: {{value}};
+<!--^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html meta.property-list.css meta.block.css -->
+<!--    ^^^^^^^^ meta.property-name.css support.type.property-name.css meta.embedded.expression.ngx.html -->
+<!--    ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--      ^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--          ^^ punctuation.section.embedded.end.ngx.html -->
+<!--            ^ punctuation.separator.key-value.css -->
+<!--             ^^^^^^^^^^ meta.property-value.css -->
+<!--              ^^^^^^^^^ meta.embedded.expression.ngx.html -->
+<!--              ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--                ^^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--                     ^^ punctuation.section.embedded.end.ngx.html -->
+<!--                       ^ punctuation.terminator.rule.css -->
+    }
+</style>
+
+
+<!--
  String interpolations
  -->
 
