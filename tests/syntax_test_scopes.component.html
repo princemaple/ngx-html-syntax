@@ -15,6 +15,19 @@
 <!--             ^^^^ variable.other.member.ngx -->
 <!--                 ^ punctuation.terminator.expression.ngx -->
 
+@let func = user.func();
+<!--^^^^^^ meta.let.identifier.ngx -->
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ meta.let.ngx keyword.operator.assignment.ngx -->
+<!--       ^ meta.let.value.ngx - meta.path -->
+<!--        ^^^^^^^^^^^ meta.let.value.ngx meta.path.ngx - meta.path meta.path -->
+<!--        ^^^^ variable.other.object.ngx -->
+<!--            ^ punctuation.accessor.ngx -->
+<!--             ^^^^ variable.function.method.ngx -->
+<!--                 ^ punctuation.section.arguments.begin.ngx -->
+<!--                  ^ punctuation.section.arguments.end.ngx -->
+<!--                   ^ punctuation.terminator.expression.ngx -->
+
 @let greeting = 'Hello, ' + name;
 <!--^^^^^^^^^^ meta.let.identifier.ngx -->
 <!-- ^^^^^^^^ variable.other.readwrite.ngx -->
@@ -38,6 +51,97 @@
 <!--              ^ keyword.operator.assignment.pipe.ngx -->
 <!--                ^^^^^ meta.function-call.identifier.ngx variable.function.filter.ngx -->
 <!--                     ^ punctuation.terminator.expression.ngx -->
+
+@let item = var[10]['bar'];
+<!--^^^^^^ meta.let.identifier.ngx -->
+<!--      ^ meta.let.ngx -->
+<!--       ^^^^^^^^^^^^^^^ meta.let.value.ngx -->
+<!--                      ^ - meta.let -->
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^^^ variable.other.readwrite.ngx -->
+<!--           ^^^^^^^^^^^ meta.subscription.ngx -->
+<!--           ^ punctuation.section.subscription.begin.ngx -->
+<!--            ^^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--              ^ punctuation.section.subscription.end.ngx -->
+<!--               ^ punctuation.section.subscription.begin.ngx -->
+<!--                ^^^^^ meta.string.ngx string.quoted.single.ngx -->
+<!--                     ^ punctuation.section.subscription.end.ngx -->
+<!--                      ^ punctuation.terminator.expression.ngx -->
+
+<!-- qualified property with missing leading object in incomplete ternary expression -->
+@let path = .foo?.bar? ;
+<!--^^^^^^ meta.let.identifier.ngx -->
+<!--      ^ meta.let.ngx -->
+<!--       ^ meta.let.value.ngx - meta.path -->
+<!--        ^^^^^^^^^ meta.let.value.ngx meta.path.ngx - meta.path meta.path -->
+<!--                 ^^ meta.let.value.ngx - meta.path -->
+<!--                   ^ - meta.let -->
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^ punctuation.accessor.ngx -->
+<!--         ^^^ variable.other.object.ngx -->
+<!--            ^^ punctuation.accessor.ngx -->
+<!--              ^^^ variable.other.member.ngx -->
+<!--                 ^ keyword.operator.ternary.ngx -->
+<!--                   ^ punctuation.terminator.expression.ngx -->
+
+@let path = .orders.value()?.[0]?.$extra?.#currency.unit;
+<!--^^^^^^ meta.let.identifier.ngx -->
+<!--      ^ meta.let.ngx -->
+<!--       ^ meta.let.value.ngx - meta.path -->
+<!--        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.let.value.ngx meta.path.ngx - meta.path meta.path -->
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^ punctuation.accessor.ngx -->
+<!--         ^^^^^^ variable.other.object.ngx -->
+<!--               ^ punctuation.accessor.ngx -->
+<!--                ^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
+<!--                     ^^ meta.function-call.arguments.ngx -->
+<!--                     ^ punctuation.section.arguments.begin.ngx -->
+<!--                      ^ punctuation.section.arguments.end.ngx -->
+<!--                       ^^ punctuation.accessor.ngx -->
+<!--                         ^^^ meta.subscription.ngx -->
+<!--                         ^ punctuation.section.subscription.begin.ngx -->
+<!--                          ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--                           ^ punctuation.section.subscription.end.ngx -->
+<!--                            ^^ punctuation.accessor.ngx -->
+<!--                              ^^^^^^ variable.other.object.ngx -->
+<!--                              ^ punctuation.definition.variable.ngx -->
+<!--                                    ^^ punctuation.accessor.ngx -->
+<!--                                      ^^^^^^^^^ variable.other.object.ngx -->
+<!--                                      ^ punctuation.definition.variable.ngx -->
+<!--                                               ^ punctuation.accessor.ngx -->
+<!--                                                ^^^^ variable.other.member.ngx -->
+<!--                                                    ^ punctuation.terminator.expression.ngx -->
+
+@let path = orders.value()?.[0]?.$extra?.#currency.unit;
+<!--^^^^^^ meta.let.identifier.ngx -->
+<!--      ^ meta.let.ngx -->
+<!--       ^ meta.let.value.ngx - meta.path -->
+<!--        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.let.value.ngx meta.path.ngx - meta.path meta.path -->
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^^^^^^ variable.other.object.ngx -->
+<!--              ^ punctuation.accessor.ngx -->
+<!--               ^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
+<!--                    ^^ meta.function-call.arguments.ngx -->
+<!--                    ^ punctuation.section.arguments.begin.ngx -->
+<!--                     ^ punctuation.section.arguments.end.ngx -->
+<!--                      ^^ punctuation.accessor.ngx -->
+<!--                        ^^^ meta.subscription.ngx -->
+<!--                        ^ punctuation.section.subscription.begin.ngx -->
+<!--                         ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--                          ^ punctuation.section.subscription.end.ngx -->
+<!--                           ^^ punctuation.accessor.ngx -->
+<!--                             ^^^^^^ variable.other.object.ngx -->
+<!--                             ^ punctuation.definition.variable.ngx -->
+<!--                                   ^^ punctuation.accessor.ngx -->
+<!--                                     ^^^^^^^^^ variable.other.object.ngx -->
+<!--                                     ^ punctuation.definition.variable.ngx -->
+<!--                                              ^ punctuation.accessor.ngx -->
+<!--                                               ^^^^ variable.other.member.ngx -->
+<!--                                                   ^ punctuation.terminator.expression.ngx -->
 
 <!--
  Control Flow
@@ -92,7 +196,7 @@
 <!--                       ^^ punctuation.section.embedded.begin.ngx.html -->
 <!--                         ^^^^^^^ source.ngx.embedded.html -->
 <!--                          ^ variable.other.object.ngx -->
-<!--                            ^ meta.function-call.identifier.ngx variable.function.ngx -->
+<!--                            ^ meta.function-call.identifier.ngx variable.function.method.ngx -->
 <!--                             ^ meta.function-call.arguments.ngx punctuation.section.arguments.begin.ngx -->
 <!--                              ^ meta.function-call.arguments.ngx punctuation.section.arguments.end.ngx -->
 <!--                                ^^ punctuation.section.embedded.end.ngx.html -->
@@ -528,7 +632,7 @@
   <!-- property subscription -->
   {{ person['name'][0] = "Mirabel" }}
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ngx.html -->
-<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ngx.embedded.html -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.ngx.embedded.html - meta.path -->
 <!-- ^^^^^^ variable.other.readwrite.ngx -->
 <!--       ^^^^^^^^^^^ meta.subscription.ngx -->
 <!--       ^ punctuation.section.subscription.begin.ngx -->
@@ -546,23 +650,63 @@
 <!--                               ^^ punctuation.section.embedded.end.ngx.html -->
 
   {{ obj?.member }}
-<!--^^^^^^^^^^^^^^^ meta.embedded.ngx.html -->
-<!--^^^^^^^^^^^^^ source.ngx.embedded.html -->
+<!--^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!-- ^^^^^^^^^^^ meta.embedded.ngx.html source.ngx.embedded.html meta.path.ngx - meta.path meta.path -->
+<!--            ^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!--             ^^ meta.embedded.ngx.html - source.ngx -->
 <!-- ^^^ variable.other.object.ngx -->
 <!--    ^^ punctuation.accessor.ngx -->
 <!--      ^^^^^^ variable.other.member.ngx -->
 <!--             ^^ punctuation.section.embedded.end.ngx.html -->
 
-  {{ obj.method() }}
-<!--^^^^^^^^^^^^^^^^ meta.embedded.ngx.html -->
-<!--^^^^^^^^^^^^^^ source.ngx.embedded.html -->
+  {{ obj.member [5] }}
+<!--^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!-- ^^^^^^^^^^^^^^ meta.embedded.ngx.html source.ngx.embedded.html meta.path.ngx - meta.path meta.path -->
+<!--               ^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!--                ^^ meta.embedded.ngx.html - source.ngx -->
 <!-- ^^^ variable.other.object.ngx -->
 <!--    ^ punctuation.accessor.ngx -->
-<!--     ^^^^^^ meta.function-call.identifier.ngx variable.function.ngx -->
+<!--     ^^^^^^ variable.other.member.ngx -->
+<!--           ^ - meta.subscription - variable -->
+<!--            ^^^ meta.subscription.ngx -->
+<!--                ^^ punctuation.section.embedded.end.ngx.html -->
+
+  {{ obj.method() }}
+<!--^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!-- ^^^^^^^^^^^^ meta.embedded.ngx.html source.ngx.embedded.html meta.path.ngx - meta.path meta.path -->
+<!--             ^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!--              ^^ meta.embedded.ngx.html - source.ngx -->
+<!-- ^^^ variable.other.object.ngx -->
+<!--    ^ punctuation.accessor.ngx -->
+<!--     ^^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
 <!--           ^^ meta.function-call.arguments.ngx -->
 <!--           ^ punctuation.section.arguments.begin.ngx -->
 <!--            ^ punctuation.section.arguments.end.ngx -->
 <!--              ^^ punctuation.section.embedded.end.ngx.html -->
+
+  {{ orders.value()?.[0]?.$extra?.#currency }}
+<!--^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ngx.html source.ngx.embedded.html meta.path.ngx - meta.path meta.path -->
+<!--                                       ^ meta.embedded.ngx.html source.ngx.embedded.html - meta.path -->
+<!--                                        ^^ meta.embedded.ngx.html - source.ngx -->
+<!-- ^^^^^^ variable.other.object.ngx -->
+<!--       ^ punctuation.accessor.ngx -->
+<!--        ^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
+<!--             ^^ meta.function-call.arguments.ngx -->
+<!--             ^ punctuation.section.arguments.begin.ngx -->
+<!--              ^ punctuation.section.arguments.end.ngx -->
+<!--               ^^ punctuation.accessor.ngx -->
+<!--                 ^^^ meta.subscription.ngx -->
+<!--                 ^ punctuation.section.subscription.begin.ngx -->
+<!--                  ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--                   ^ punctuation.section.subscription.end.ngx -->
+<!--                    ^^ punctuation.accessor.ngx -->
+<!--                      ^^^^^^ variable.other.object.ngx -->
+<!--                      ^ punctuation.definition.variable.ngx -->
+<!--                            ^^ punctuation.accessor.ngx -->
+<!--                              ^^^^^^^^^ variable.other.member.ngx -->
+<!--                              ^ punctuation.definition.variable.ngx -->
+<!--                                        ^^ punctuation.section.embedded.end.ngx.html -->
 
   {{ func(arg, "value") }}
 <!--^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ngx.html -->
