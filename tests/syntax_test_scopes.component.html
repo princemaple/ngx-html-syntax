@@ -743,6 +743,79 @@
 
 
 <!--
+ String interpolations
+ -->
+
+ <![CDATA[string {{value}}!]]>
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.sgml.cdata.html -->
+<!--^^^^^ keyword.declaration.cdata.html -->
+<!--     ^ punctuation.definition.tag.begin.html -->
+<!--      ^^^^^^^^^^^^^^^^^ meta.string.html -->
+<!--      ^^^^^^^ string.unquoted.cdata.html -->
+<!--             ^^^^^^^^^ meta.embedded.expression.ngx.html -->
+<!--             ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--               ^^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--                    ^^ punctuation.section.embedded.end.ngx.html -->
+<!--                      ^ string.unquoted.cdata.html -->
+<!--                       ^^^ punctuation.definition.tag.end.html -->
+
+<!-- generic attributes -->
+<div width="{{width}}px">
+<!--^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.html -->
+<!-- ^^^^^ entity.other.attribute-name.html -->
+<!--      ^ punctuation.separator.key-value.html -->
+<!--       ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--        ^^^^^^^^^ meta.string.html meta.embedded.expression.ngx.html -->
+<!--        ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--          ^^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--               ^^ punctuation.section.embedded.end.ngx.html -->
+<!--                 ^^^ meta.string.html string.quoted.double.html -->
+<!--                   ^ punctuation.definition.string.end.html -->
+<!--                    ^ punctuation.definition.tag.end.html -->
+
+<!-- class attributes -->
+<div class="{{class}}-name">
+<!--^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.class.html -->
+<!-- ^^^^^ entity.other.attribute-name.class.html -->
+<!--      ^ punctuation.separator.key-value.html -->
+<!--       ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--        ^^^^^^^^^^^^^^ meta.class-name.html meta.string.html -->
+<!--        ^^^^^^^^^ meta.embedded.expression.ngx.html -->
+<!--        ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--          ^^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--               ^^ punctuation.section.embedded.end.ngx.html -->
+<!--                 ^^^^^ string.quoted.double.html -->
+<!--                      ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                       ^ punctuation.definition.tag.end.html -->
+
+<!-- CSS attributes -->
+<div style="{{prop}}-name: {{value + " >
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.style.html -->
+<!--                                  ^^ - meta.attribute-with-value -->
+<!-- ^^^^^ entity.other.attribute-name.style.html -->
+<!--      ^ punctuation.separator.key-value.html -->
+<!--       ^ meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--        ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html source.css.embedded.html -->
+<!--        ^^^^^^^^ meta.embedded.expression.ngx.html -->
+<!--        ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--          ^^^^ source.ngx.embedded.html variable.other.readwrite.ngx -->
+<!--              ^^ punctuation.section.embedded.end.ngx.html -->
+<!--                ^^^^^ meta.property-name.css support.type.property-name.css -->
+<!--                     ^ punctuation.separator.key-value.css -->
+<!--                      ^^^^^^^^^^^ meta.property-value.css -->
+<!--                       ^^^^^^^^^^ meta.embedded.expression.ngx.html -->
+<!--                       ^^ punctuation.section.embedded.begin.ngx.html -->
+<!--                         ^^^^^^^^ source.ngx.embedded.html -->
+<!--                         ^^^^^ variable.other.readwrite.ngx -->
+<!--                               ^ keyword.operator.arithmetic.ngx -->
+<!--                                 ^ meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                                   ^ punctuation.definition.tag.end.html -->
+
+
+<!--
  Binding dynamic text, properties and attributes
  https://v18.angular.dev/guide/templates/binding#binding-dynamic-properties-and-attributes
  -->

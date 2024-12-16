@@ -14,6 +14,14 @@ contexts:
 
 ###[ HTML CUSTOMIZATIONS ]#####################################################
 
+  cdata-content:
+    - meta_prepend: true
+    - include: ng-string-interpolations
+
+  strings-common-content:
+    - meta_prepend: true
+    - include: ng-string-interpolations
+
   tag:
     - meta_prepend: true
     - include: ng-declarations
@@ -23,6 +31,44 @@ contexts:
   tag-attributes:
     - meta_prepend: true
     - include: ng-directives
+
+  tag-generic-attribute-name:
+    - meta_prepend: true
+    - include: ng-interpolations
+
+  tag-attribute-value-content:
+    - meta_prepend: true
+    - include: ng-string-interpolations
+
+###[ HTML STYLE ATTRIBUTES ]###################################################
+
+  tag-style-attribute-assignment:
+    - meta_include_prototype: false
+    - match: =
+      scope: punctuation.separator.key-value.html
+      set:
+        - immediately-pop  # workaround https://github.com/sublimehq/sublime_text/issues/4069
+        - tag-style-attribute-value
+    - include: else-pop
+
+  tag-style-attribute-value:
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      embed: scope:source.css.embedded.ngx#rule-list-body
+      embed_scope: meta.string.html source.css.embedded.html
+      escape: \"
+      escape_captures:
+        0: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+      pop: 1
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      embed: scope:source.css.embedded.ngx#rule-list-body
+      embed_scope: meta.string.html source.css.embedded.html
+      escape: \'
+      escape_captures:
+        0: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+      pop: 1
+    - include: else-pop
 
 ###[ ANGULAR DIRECTIVES ]######################################################
 
@@ -294,6 +340,17 @@ contexts:
       scope: keyword.operator.iteration.ngx
 
 ###[ ANGULAR INTERPOLATIONS ]##################################################
+
+  ng-string-interpolations:
+    - match: '{{'
+      scope: meta.embedded.expression.ngx.html punctuation.section.embedded.begin.ngx.html
+      push: ng-string-interpolation-body
+
+  ng-string-interpolation-body:
+    - clear_scopes: 1
+    - meta_include_prototype: false
+    - meta_content_scope: meta.embedded.expression.ngx.html source.ngx.embedded.html
+    - include: ng-interpolation-body
 
   ng-interpolations:
     - match: '{{'
