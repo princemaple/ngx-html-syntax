@@ -10,24 +10,6 @@ file_extensions:
   - ngx
   - component.html
 
-variables:
-
-  bin_digit: '[01_]'
-  oct_digit: '[0-7_]'
-  dec_digit: '[0-9_]'
-  hex_digit: '[\h_]'
-  dec_integer: (?:0|[1-9]{{dec_digit}}*)
-  dec_exponent: '[Ee](?:[-+]|(?![-+])){{dec_digit}}*'
-
-  # JavaScript identifier
-  ident_name: (?:{{ident_start}}{{ident_part}}*{{ident_break}})
-  ident_break: (?!{{ident_part}})
-  ident_escape: (?:\\u(?:\h{4}|\{\h+\}))
-  ident_start: (?:[_$\p{L}\p{Nl}]|{{ident_escape}})
-  ident_part: (?:[_$\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]|{{ident_escape}})
-
-  dot_accessor: (?:\??\.(?!\.))
-
 contexts:
 
 ###[ HTML CUSTOMIZATIONS ]#####################################################
@@ -686,3 +668,23 @@ contexts:
   ng-block-pop:
     - match: (?=[;)}])
       pop: 1
+
+###############################################################################
+
+variables:
+
+  bin_digit: '[01_]'
+  oct_digit: '[0-7_]'
+  dec_digit: '[0-9_]'
+  hex_digit: '[\h_]'
+  dec_integer: (?:0|[1-9]{{dec_digit}}*)
+  dec_exponent: '[Ee](?:[-+]|(?![-+])){{dec_digit}}*'
+
+  # JavaScript identifier
+  ident_name: (?:{{ident_start}}{{ident_part}}*{{ident_break}})
+  ident_break: (?!{{ident_part}})
+  ident_escape: (?:\\u(?:\h{4}|\{\h+\}))
+  ident_start: (?:[_$\p{L}\p{Nl}]|{{ident_escape}})
+  ident_part: (?:[_$\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]|{{ident_escape}})
+
+  dot_accessor: (?:\??\.(?!\.))
