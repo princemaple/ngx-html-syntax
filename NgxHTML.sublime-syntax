@@ -14,6 +14,10 @@ contexts:
 
 ###[ HTML CUSTOMIZATIONS ]#####################################################
 
+  main:
+    - meta_prepend: true
+    - meta_scope: meta.template.ngx
+
   cdata-content:
     - meta_prepend: true
     - include: ng-string-interpolations
