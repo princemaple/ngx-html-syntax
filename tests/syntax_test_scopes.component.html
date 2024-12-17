@@ -6,6 +6,8 @@
  -->
 
 @let name = user.name;
+<!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html meta.let.ngx keyword.declaration.variable.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!-- ^^^^ variable.other.readwrite.ngx -->
 <!--      ^ meta.let.ngx keyword.operator.assignment.ngx -->
@@ -16,6 +18,7 @@
 <!--                 ^ punctuation.terminator.expression.ngx -->
 
 @let func = user.func();
+<!--^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!-- ^^^^ variable.other.readwrite.ngx -->
 <!--      ^ meta.let.ngx keyword.operator.assignment.ngx -->
@@ -29,6 +32,7 @@
 <!--                   ^ punctuation.terminator.expression.ngx -->
 
 @let greeting = 'Hello, ' + name;
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^^^^^ meta.let.identifier.ngx -->
 <!-- ^^^^^^^^ variable.other.readwrite.ngx -->
 <!--          ^ meta.let.ngx keyword.operator.assignment.ngx -->
@@ -41,6 +45,7 @@
 <!--                            ^ punctuation.terminator.expression.ngx -->
 
 @let data = data$ | async;
+<!--^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!--      ^ meta.let.ngx -->
 <!--       ^^^^^^^ meta.let.value.ngx - meta.filter -->
@@ -53,6 +58,7 @@
 <!--                     ^ punctuation.terminator.expression.ngx -->
 
 @let item = var[10]['bar'];
+<!--^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!--      ^ meta.let.ngx -->
 <!--       ^^^^^^^^^^^^^^^ meta.let.value.ngx -->
@@ -71,6 +77,7 @@
 
 <!-- qualified property with missing leading object in incomplete ternary expression -->
 @let path = .foo?.bar? ;
+<!--^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!--      ^ meta.let.ngx -->
 <!--       ^ meta.let.value.ngx - meta.path -->
@@ -87,6 +94,7 @@
 <!--                   ^ punctuation.terminator.expression.ngx -->
 
 @let path = .orders.value()?.[0]?.$extra?.#currency.unit;
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!--      ^ meta.let.ngx -->
 <!--       ^ meta.let.value.ngx - meta.path -->
@@ -116,6 +124,7 @@
 <!--                                                    ^ punctuation.terminator.expression.ngx -->
 
 @let path = orders.value()?.[0]?.$extra?.#currency.unit;
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ meta.let.identifier.ngx -->
 <!--      ^ meta.let.ngx -->
 <!--       ^ meta.let.value.ngx - meta.path -->
@@ -149,9 +158,10 @@
  -->
 
 @if (a > b) {
-<!-- <- keyword.control.conditional.if.ngx punctuation.definition.keyword.ngx -->
- <!-- <- keyword.control.conditional.if.ngx -->
-  <!-- <- keyword.control.conditional.if.ngx -->
+<!--^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
+<!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.if.ngx punctuation.definition.keyword.ngx -->
+ <!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.if.ngx -->
+  <!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.if.ngx -->
 <!--^^^^^^^ meta.group.ngx -->
 <!--^ punctuation.section.group.begin.ngx -->
 <!-- ^ variable.other.readwrite.ngx -->
@@ -173,6 +183,7 @@
 <!--                             ^^ punctuation.section.embedded.end.ngx.html - source.ngx -->
 } @else if (b > a()) {
 <!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
+<!--^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ keyword.control.conditional.elseif.ngx -->
 <!--       ^^^^^^^^^ meta.group.ngx -->
 <!--       ^ punctuation.section.group.begin.ngx -->
@@ -202,7 +213,8 @@
 <!--                                ^^ punctuation.section.embedded.end.ngx.html -->
 } @else {
 <!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
-  <!-- <- keyword.control.conditional.else.ngx punctuation.definition.keyword.ngx -->
+  <!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.else.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^ keyword.control.conditional.else.ngx -->
 <!--    ^ meta.block.ngx punctuation.section.block.begin.ngx -->
     {{ a }} is equal to {{ b }}
@@ -250,6 +262,8 @@
  -->
 
 @switch (accessLevel) {
+<!-- <- meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.switch.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^ keyword.control.conditional.switch.ngx -->
 <!--    ^^^^^^^^^^^^^ meta.group.ngx -->
 <!--    ^ punctuation.section.group.begin.ngx -->
@@ -257,7 +271,7 @@
 <!--                ^ punctuation.section.group.end.ngx -->
 <!--                  ^ meta.block.ngx punctuation.section.block.begin.ngx -->
     @case ('admin') {
-<!--^^^^^^^^^^^^^^^^ meta.block.ngx - meta.block meta.block -->
+<!--^^^^^^^^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html  - meta.block meta.block -->
 <!--                ^^ meta.block.ngx meta.block.ngx -->
 <!--^^^^^ keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
@@ -277,7 +291,7 @@
 <!-- ^ meta.block.ngx - meta.block meta.block -->
 
     @case {
-<!--^^^^^^ meta.block.ngx - meta.block meta.block -->
+<!--^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html - meta.block meta.block -->
 <!--      ^^ meta.block.ngx meta.block.ngx -->
 <!--^^^^^ keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
@@ -292,7 +306,7 @@
 <!--^ meta.block.ngx meta.block.ngx punctuation.section.block.end.ngx -->
 <!-- ^ meta.block.ngx - meta.block meta.block -->
     @default {
-<!--^^^^^^^^^ meta.block.ngx - meta.block meta.block -->
+<!--^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html - meta.block meta.block -->
 <!--         ^^ meta.block.ngx meta.block.ngx -->
 <!--^^^^^^^^ keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
@@ -311,6 +325,8 @@
  -->
 
 @for (user of users; track user.id) {
+<!-- <- meta.embedded.statement.ngx source.ngx.embedded.html keyword.control.loop.for.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx source.ngx.embedded.html -->
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.ngx -->
 <!-- ^ punctuation.section.group.begin.ngx -->
 <!--  ^^^^ variable.other.readwrite.ngx -->
@@ -326,14 +342,16 @@
   {{ user.name }}
 } @empty {
 <!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
-  <!-- <- keyword.control.loop.else.ngx punctuation.definition.keyword.ngx -->
-<!--^^^^ keyword.control.loop.else.ngx -->
+  <!-- <- meta.embedded.statement.ngx source.ngx.embedded.html keyword.control.loop.else.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^ meta.embedded.statement.ngx source.ngx.embedded.html keyword.control.loop.else.ngx -->
+<!--    ^ meta.embedded.statement.ngx source.ngx.embedded.html - keyword - punctuation -->
 <!--     ^ meta.block.ngx punctuation.section.block.begin.ngx -->
   Empty list of users
-}
-<!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
+.html}
+<!--.html <- meta.block.ngx punctuation.section.block.end.ngx -->
 
 @for (item of items; track item.id; let idx = $index, e = $even) {
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx source.ngx.embedded.html -->
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.ngx -->
 <!-- ^ punctuation.section.group.begin.ngx -->
 <!--  ^^^^ variable.other.readwrite.ngx -->
@@ -370,9 +388,11 @@
 <!--                       ^^^^ variable.other.member.ngx -->
 <!--                            ^^ punctuation.section.embedded.end.ngx.html -->
 }
-<!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
+<!--.html <- meta.block.ngx punctuation.section.block.end.ngx -->
 
 @if (users$ | async; as users) {
+<!-- <- meta.embedded.statement.ngx source.ngx.embedded.html keyword.control.conditional.if.ngx punctuation.definition.keyword.ngx -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx source.ngx.embedded.html -->
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.ngx -->
 <!--^ punctuation.section.group.begin.ngx -->
 <!-- ^^^^^^ variable.other.readwrite.ngx -->
@@ -402,7 +422,7 @@
 <!--                       ^ entity.name.tag.block.any.html -->
 <!--                        ^ punctuation.definition.tag.end.html -->
 }
-<!-- <- meta.block.ngx punctuation.section.block.end.ngx -->
+<!--.html <- meta.block.ngx punctuation.section.block.end.ngx -->
 
 
 <!--
@@ -411,6 +431,7 @@
  -->
 
     @defer { <comment-list /> }
+<!--^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ keyword.control.flow.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
 <!--       ^^^^^^^^^^^^^^^^^^^^ meta.block.ngx -->
@@ -422,6 +443,7 @@
 <!--                          ^ punctuation.section.block.end.ngx -->
 
     @defer (on viewport) {
+<!--^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--^^^^^^ keyword.control.flow.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
 <!--       ^^^^^^^^^^^^^ meta.group.ngx -->
@@ -433,18 +455,21 @@
         <comment-list />
     } @loading {
 <!--^ meta.block.ngx punctuation.section.block.end.ngx -->
+<!--  ^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--  ^^^^^^^^ keyword.control.flow.ngx -->
 <!--  ^ punctuation.definition.keyword.ngx -->
 <!--           ^ meta.block.ngx punctuation.section.block.begin.ngx -->
       Loading…
     } @error {
 <!--^ meta.block.ngx punctuation.section.block.end.ngx -->
+<!--  ^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--  ^^^^^^ keyword.control.flow.ngx -->
 <!--  ^ punctuation.definition.keyword.ngx -->
 <!--         ^ meta.block.ngx punctuation.section.block.begin.ngx -->
       Loading failed :(
     } @placeholder {
 <!--^ meta.block.ngx punctuation.section.block.end.ngx -->
+<!--  ^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--  ^^^^^^^^^^^^ keyword.control.flow.ngx -->
 <!--  ^ punctuation.definition.keyword.ngx -->
 <!--               ^ meta.block.ngx punctuation.section.block.begin.ngx -->
@@ -454,6 +479,7 @@
 <!-- ^ - meta.block -->
 
 @defer (on viewport; when $var prefetch on idle; prefetch when true) {
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
 <!--   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.ngx -->
 <!--   ^ punctuation.section.group.begin.ngx -->
 <!--    ^^ keyword.control.flow.ngx -->

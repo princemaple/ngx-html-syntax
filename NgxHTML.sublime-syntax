@@ -177,7 +177,9 @@ contexts:
 
   ng-declarations:
     - match: (@)let{{ident_break}}
-      scope: meta.let.ngx keyword.declaration.variable.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        meta.let.ngx keyword.declaration.variable.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
@@ -191,15 +193,21 @@ contexts:
     - include: else-pop
 
   ng-let-assignment:
-    - meta_content_scope: meta.let.identifier.ngx
+    - meta_content_scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        meta.let.identifier.ngx
     - match: =
-      scope: meta.let.ngx keyword.operator.assignment.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        meta.let.ngx keyword.operator.assignment.ngx
       set: ng-let-value
     - include: else-pop
 
   ng-let-value:
     - meta_include_prototype: false
-    - meta_content_scope: meta.let.value.ngx
+    - meta_content_scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        meta.let.value.ngx
     - match: ';'
       scope: punctuation.terminator.expression.ngx
       pop: 1
@@ -211,39 +219,51 @@ contexts:
     # conditionals
     # https://angular.dev/guide/templates/control-flow#conditionally-display-content-with-if-else-if-and-else
     - match: (@)if{{ident_break}}
-      scope: keyword.control.conditional.if.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.if.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
         - ng-block
         - ng-conditional-group
     - match: (@)else\s+if{{ident_break}}
-      scope: keyword.control.conditional.elseif.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.elseif.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
         - ng-block
         - ng-conditional-group
     - match: (@)else{{ident_break}}
-      scope: keyword.control.conditional.else.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.else.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push: ng-block
     # https://angular.dev/guide/templates/control-flow#conditionally-display-content-with-the-switch-block
     - match: (@)case{{ident_break}}
-      scope: keyword.control.conditional.case.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.case.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
         - ng-block
         - ng-conditional-group
     - match: (@)default{{ident_break}}
-      scope: keyword.control.conditional.case.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.case.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push: ng-block
     - match: (@)switch{{ident_break}}
-      scope: keyword.control.conditional.switch.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.conditional.switch.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
@@ -251,20 +271,26 @@ contexts:
         - ng-conditional-group
     # https://angular.dev/guide/templates/control-flow#providing-a-fallback-for-for-blocks-with-the-empty-block
     - match: (@)for{{ident_break}}
-      scope: keyword.control.loop.for.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.loop.for.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
         - ng-block
         - ng-for-group
     - match: (@)empty{{ident_break}}
-      scope: keyword.control.loop.else.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.loop.else.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push: ng-block
     # https://angular.dev/guide/templates/defer
     - match: (@)(?:defer|error|loading|placeholder){{ident_break}}
-      scope: keyword.control.flow.ngx
+      scope:
+        meta.embedded.statement.ngx.html source.ngx.embedded.html
+        keyword.control.flow.ngx
       captures:
         1: punctuation.definition.keyword.ngx
       push:
@@ -273,6 +299,7 @@ contexts:
 
   ng-block:
     - meta_include_prototype: false
+    - meta_content_scope: meta.embedded.statement.ngx.html source.ngx.embedded.html
     - match: \{
       scope: punctuation.section.block.begin.ngx
       set: ng-block-body
