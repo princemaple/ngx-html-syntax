@@ -85,7 +85,7 @@ contexts:
     - match: \"
       scope: meta.string.ngx string.quoted.double.ngx punctuation.definition.string.begin.ngx
       embed: ng-directive-expressions
-      embed_scope: meta.directive.value.ngx meta.string.ngx meta.interpolation.ngx source.ngx.embedded.html
+      embed_scope: meta.directive.value.ngx meta.string.ngx meta.embedded.expression.ngx source.ngx.embedded.html
       escape: \"
       escape_captures:
         0: meta.string.ngx string.quoted.double.ngx punctuation.definition.string.end.ngx
@@ -93,7 +93,7 @@ contexts:
     - match: \'
       scope: meta.string.ngx string.quoted.single.ngx punctuation.definition.string.begin.ngx
       embed: ng-directive-expressions
-      embed_scope: meta.directive.value.ngx meta.string.ngx meta.interpolation.ngx source.ngx.embedded.html
+      embed_scope: meta.directive.value.ngx meta.string.ngx meta.embedded.expression.ngx source.ngx.embedded.html
       escape: \'
       escape_captures:
         0: meta.string.ngx string.quoted.single.ngx punctuation.definition.string.end.ngx
@@ -297,14 +297,14 @@ contexts:
 
   ng-interpolations:
     - match: '{{'
-      scope: meta.embedded.ngx.html punctuation.section.embedded.begin.ngx.html
+      scope: meta.embedded.expression.ngx.html punctuation.section.embedded.begin.ngx.html
       push: ng-interpolation-body
 
   ng-interpolation-body:
     - meta_include_prototype: false
-    - meta_content_scope: meta.embedded.ngx.html source.ngx.embedded.html
+    - meta_content_scope: meta.embedded.expression.ngx.html source.ngx.embedded.html
     - match: '}}'
-      scope: meta.embedded.ngx.html punctuation.section.embedded.end.ngx.html
+      scope: meta.embedded.expression.ngx.html punctuation.section.embedded.end.ngx.html
       pop: 1
     - include: ng-expressions
 
