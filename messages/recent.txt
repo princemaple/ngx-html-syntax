@@ -1,0 +1,5 @@
+# Ngx HTML Syntax 1.0+
+
+Huge thanks to @deathaxe for rewriting the whole syntax to properly incorporate Angular Expressions.
+
+Now we have highly accurate syntax highlighting in component html files.
