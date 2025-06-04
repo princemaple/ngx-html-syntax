@@ -513,6 +513,88 @@
 <!--          ^ punctuation.definition.string.begin.ngx -->
 <!--                ^ punctuation.definition.string.end.ngx -->
 
+  <!-- template strings -->
+  {{ `Hello ${name + `template ${var}`}` }}
+<!-- ^^^^^^^ meta.string.template.ngx - meta.interpolation -->
+<!--        ^^^^^^^^^ meta.string.template.ngx meta.interpolation.ngx - meta.string meta.string -->
+<!--                 ^^^^^^^^^^ meta.string.template.ngx meta.interpolation.ngx meta.string.template.ngx - meta.interpolation meta.interpolation -->
+<!--                           ^^^^^^ meta.string.template.ngx meta.interpolation.ngx meta.string.template.ngx meta.interpolation.ngx -->
+<!--                                 ^ meta.string.template.ngx meta.interpolation.ngx meta.string.template.ngx - meta.interpolation meta.interpolation -->
+<!--                                  ^ meta.string.template.ngx meta.interpolation.ngx - meta.string meta.string -->
+<!--                                   ^ meta.string.template.ngx - meta.interpolation -->
+<!-- ^^^^^^^ string.quoted.other.ngx -->
+<!--        ^^^^^^^^^ - string -->
+<!-- ^ punctuation.definition.string.begin.ngx -->
+<!--        ^^ punctuation.section.interpolation.begin.ngx -->
+<!--          ^^^^ variable.other.readwrite.ngx -->
+<!--               ^ keyword.operator.arithmetic.ngx -->
+<!--                 ^^^^^^^^^^ string.quoted.other.ngx -->
+<!--                 ^ punctuation.definition.string.begin.ngx -->
+<!--                           ^^^^^^ - string -->
+<!--                           ^^ punctuation.section.interpolation.begin.ngx -->
+<!--                             ^^^ variable.other.readwrite.ngx -->
+<!--                                ^ punctuation.section.interpolation.end.ngx -->
+<!--                                 ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+<!--                                  ^ punctuation.section.interpolation.end.ngx - string -->
+<!--                                   ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+
+  <!-- tagged template strings -->
+  {{ tag`Text \`${var}\`` }}
+<!-- ^^^ variable.function.tagged-template.ngx - string -->
+<!--    ^^^^^^^^^^^^^^^^^ meta.string.template.ngx -->
+<!--    ^^^^^^^^ string.quoted.other.ngx -->
+<!--    ^ punctuation.definition.string.begin.ngx -->
+<!--          ^^ constant.character.escape.ngx -->
+<!--            ^^^^^^ meta.interpolation.ngx - string -->
+<!--            ^^ punctuation.section.interpolation.begin.ngx -->
+<!--              ^^^ variable.other.readwrite.ngx -->
+<!--                 ^ punctuation.section.interpolation.end.ngx -->
+<!--                  ^^^ string.quoted.other.ngx -->
+<!--                  ^^ constant.character.escape.ngx -->
+<!--                    ^ punctuation.definition.string.end.ngx -->
+
+  <!-- regular expressions -->
+  {{ `/^[a-z]${var + `nest\`ed ${ `/\w+/` + pattern}`}\d+/` }}
+<!-- ^^^^^^^^ meta.string.template.regexp.ngx - meta.interpolation -->
+<!--         ^^^^^^^^ meta.string.template.regexp.ngx meta.interpolation.ngx - meta.string meta.strin -->
+<!--                 ^^^^^^^^^^ meta.string.template.regexp.ngx meta.interpolation.ngx meta.string.template.ngx - meta.interpolation meta.interpolation -->
+<!--                           ^^^ meta.string.template.regexp.ngx meta.interpolation.ngx meta.string.template.ngx meta.interpolation.ngx -->
+<!--                              ^^^^^^^ meta.string.template.regexp.ngx meta.interpolation.ngx meta.string.template.ngx meta.interpolation.ngx meta.string.template.regexp.ngx -->
+<!--                                     ^^^^^^^^^^^ meta.string.template.regexp.ngx meta.interpolation.ngx meta.string.template.ngx meta.interpolation.ngx -->
+<!--                                                ^ meta.string.template.regexp.ngx meta.interpolation.ngx meta.string.template.ngx - meta.interpolation meta.interpolation -->
+<!--                                                 ^ meta.string.template.regexp.ngx meta.interpolation.ngx - meta.string meta.strin -->
+<!--                                                  ^^^^^ meta.string.template.regexp.ngx - meta.interpolation -->
+<!-- ^ string.quoted.other.ngx punctuation.definition.string.begin.ngx -->
+<!--  ^ punctuation.definition.pattern.begin.ngx -->
+<!--   ^ keyword.control.anchor.regexp -->
+<!--    ^^^^^ meta.set.regexp -->
+<!--    ^ punctuation.definition.set.begin.regexp -->
+<!--     ^^^ constant.other.range.regexp -->
+<!--      ^ punctuation.separator.sequence.regexp -->
+<!--        ^ punctuation.definition.set.end.regexp -->
+<!--         ^^ punctuation.section.interpolation.begin.ngx -->
+<!--           ^^^ variable.other.readwrite.ngx -->
+<!--               ^ keyword.operator.arithmetic.ngx -->
+<!--                 ^^^^^^^^^^ string.quoted.other.ngx -->
+<!--                 ^ punctuation.definition.string.begin.ngx -->
+<!--                      ^^ constant.character.escape.ngx -->
+<!--                           ^^ punctuation.section.interpolation.begin.ngx -->
+<!--                              ^ string.quoted.other.ngx punctuation.definition.string.begin.ngx -->
+<!--                               ^ punctuation.definition.pattern.begin.ngx -->
+<!--                                ^^ keyword.control.character-class.regexp -->
+<!--                                  ^ keyword.operator.quantifier.regexp -->
+<!--                                   ^ punctuation.definition.pattern.end.ngx -->
+<!--                                    ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+<!--                                      ^ keyword.operator.arithmetic.ngx -->
+<!--                                        ^^^^^^^ variable.other.readwrite.ngx -->
+<!--                                               ^ punctuation.section.interpolation.end.ngx -->
+<!--                                                ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+<!--                                                 ^ punctuation.section.interpolation.end.ngx -->
+<!--                                                  ^^ keyword.control.character-class.regexp -->
+<!--                                                    ^ keyword.operator.quantifier.regexp -->
+<!--                                                     ^ punctuation.definition.pattern.end.ngx -->
+<!--                                                      ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+
   <!-- escaped chars -->
   {{ "\xAF \u2AFF \n \"" }}
 <!--^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html -->

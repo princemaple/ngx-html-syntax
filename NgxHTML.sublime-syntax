@@ -426,6 +426,7 @@ contexts:
     - include: ng-constants
     - include: ng-numbers
     - include: ng-strings
+    - include: ng-templates
     - include: ng-variables
 
 ###[ ANGULAR ARRAYS ]##########################################################
@@ -668,6 +669,92 @@ contexts:
       scope: constant.character.escape.unicode.16bit.ngx
     - match: \\.
       scope: constant.character.escape.ngx
+
+  ng-templates:
+    # tagged template strings
+    - match: ({{ident_name}})(\`)
+      captures:
+        1: variable.function.tagged-template.ngx
+        2: meta.string.template.ngx string.quoted.other.ngx punctuation.definition.string.begin.ngx
+      push: ng-tagged-template-plain-body
+    # untagged plain or regexp template strings
+    - match: \`
+      scope: string.quoted.other.ngx punctuation.definition.string.begin.ngx
+      branch_point: template-string
+      branch:
+        - ng-template-pattern-begin
+        - ng-template-plain-body
+
+  ng-tagged-template-plain-body:
+    - meta_content_scope: meta.string.template.ngx string.quoted.other.ngx
+    - include: ng-tagged-template-plain-end
+    - include: ng-template-string-interpolations
+    - include: ng-string-content
+
+  ng-tagged-template-plain-end:
+    - match: \`
+      scope: meta.string.template.ngx string.quoted.other.ngx punctuation.definition.string.end.ngx
+      pop: 1
+    - match: \n
+      scope: invalid.illegal.newline.ngx
+      pop: 1
+
+  ng-template-pattern-begin:
+    - meta_scope: meta.string.template.regexp.ngx
+    - match: /
+      scope: punctuation.definition.pattern.begin.ngx
+      push: ng-template-pattern-body
+    - match: ''
+      fail: template-string
+
+  ng-template-pattern-body:
+    - match: (/)(\`)
+      captures:
+        1: punctuation.definition.pattern.end.ngx
+        2: string.quoted.other.ngx punctuation.definition.string.end.ngx
+      pop: 2
+    - match: (?=\`)
+      fail: template-string
+    - match: \n
+      scope: invalid.illegal.newline.ngx
+      pop: 2
+    - include: scope:source.regexp.embedded.ngx.template-string
+      apply_prototype: true
+
+  ng-template-plain-body:
+    - meta_scope: meta.string.template.ngx
+    - meta_content_scope: string.quoted.other.ngx
+    - match: \`
+      scope: string.quoted.other.ngx punctuation.definition.string.end.ngx
+      pop: 1
+    - match: \n
+      scope: invalid.illegal.newline.ngx
+      pop: 1
+    - include: ng-template-string-interpolations
+    - include: ng-string-content
+
+  ng-template-string-interpolations:
+    - match: \$\{
+      scope: punctuation.section.interpolation.begin.ngx
+      push: ng-template-string-interpolation-body
+
+  ng-template-string-interpolation-body:
+    - clear_scopes: 1
+    - meta_scope: meta.interpolation.ngx
+    - include: ng-template-text-interpolation-body
+
+  ng-template-text-interpolations:
+    # used by embedded syntaxes (e.g.: CSS or HTML)
+    - match: \$\{
+      scope: punctuation.section.interpolation.begin.ngx
+      push: ng-template-text-interpolation-body
+
+  ng-template-text-interpolation-body:
+    - meta_scope: meta.interpolation.ngx
+    - match: \}
+      scope: punctuation.section.interpolation.end.ngx
+      pop: 1
+    - include: ng-expressions
 
 ###[ ANGULAR VARIABLES ]#######################################################
 
