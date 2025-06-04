@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+scope: source.regexp.embedded.ngx.template-string
+version: 2
+hidden: true
+
+extends: Packages/Regular Expressions/RegExp (Basic).sublime-syntax
+
+contexts:
+
+  prototype:
+    - match: (?=/?`)
+      pop: 1
+    - include: NgxHTML.sublime-syntax#ng-template-text-interpolations
