@@ -672,6 +672,16 @@ contexts:
 
   ng-templates:
     # tagged template strings
+    - match: (css)(\`)
+      captures:
+        1: variable.function.tagged-template.ngx
+        2: meta.string.template.ngx string.quoted.other.ngx punctuation.definition.string.begin.ngx
+      push: ng-tagged-template-css-body
+    - match: (html)(\`)
+      captures:
+        1: variable.function.tagged-template.ngx
+        2: meta.string.template.ngx string.quoted.other.ngx punctuation.definition.string.begin.ngx
+      push: ng-tagged-template-html-body
     - match: ({{ident_name}})(\`)
       captures:
         1: variable.function.tagged-template.ngx
@@ -684,6 +694,18 @@ contexts:
       branch:
         - ng-template-pattern-begin
         - ng-template-plain-body
+
+  ng-tagged-template-css-body:
+    - meta_content_scope: meta.string.template.ngx source.css.embedded.ngx
+    - include: ng-tagged-template-plain-end
+    - include: scope:source.css.embedded.template-string.ngx
+      apply_prototype: true
+
+  ng-tagged-template-html-body:
+    - meta_content_scope: meta.string.template.ngx text.html.embedded.ngx
+    - include: ng-tagged-template-plain-end
+    - include: scope:text.html.embedded.template-string.ngx
+      apply_prototype: true
 
   ng-tagged-template-plain-body:
     - meta_content_scope: meta.string.template.ngx string.quoted.other.ngx
@@ -718,7 +740,7 @@ contexts:
     - match: \n
       scope: invalid.illegal.newline.ngx
       pop: 2
-    - include: scope:source.regexp.embedded.ngx.template-string
+    - include: scope:source.regexp.embedded.template-string.ngx
       apply_prototype: true
 
   ng-template-plain-body:
@@ -741,15 +763,15 @@ contexts:
   ng-template-string-interpolation-body:
     - clear_scopes: 1
     - meta_scope: meta.interpolation.ngx
-    - include: ng-template-text-interpolation-body
+    - include: ng-template-interpolation-body
 
-  ng-template-text-interpolations:
+  ng-template-interpolations:
     # used by embedded syntaxes (e.g.: CSS or HTML)
     - match: \$\{
       scope: punctuation.section.interpolation.begin.ngx
-      push: ng-template-text-interpolation-body
+      push: ng-template-interpolation-body
 
-  ng-template-text-interpolation-body:
+  ng-template-interpolation-body:
     - meta_scope: meta.interpolation.ngx
     - match: \}
       scope: punctuation.section.interpolation.end.ngx

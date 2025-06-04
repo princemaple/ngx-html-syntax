@@ -8,9 +8,6 @@ hidden: true
 
 extends: Packages/CSS/CSS.sublime-syntax
 
-variables:
-  ident_start: (?:{{nmstart}}|{{)
-
 contexts:
 
   prototype:
@@ -21,22 +18,39 @@ contexts:
     - meta_prepend: true
     - include: NgxHTML.sublime-syntax#ng-string-interpolations
 
-  at-keyframe-block-body:
-    # required until ST4174 (PR #3820)
+  at-counter-style-declaration-list:
+    # required until ST4193 (PR #4055)
     - meta_prepend: true
-    - meta_include_prototype: false
+    - match: (?={{)
+      pop: 1
 
-  at-layer-name-list:
-    # required until ST4174 (PR #3820)
-    - meta_prepend: true
+  at-keyframe-block:
+    # required until ST4193 (PR #4055)
     - meta_include_prototype: false
+    - meta_prepend: true
+    - match: (?={{)
+      pop: 1
 
-  property-list-body:
-    # required until ST4174 (PR #3820)
+  at-other-body:
+    # required until ST4193 (PR #4055)
     - meta_prepend: true
-    - meta_include_prototype: false
+    - match: (?={{)
+      pop: 1
 
-  stylesheet-block-body:
-    # required until ST4174 (PR #3831)
+  maybe-property-list:
+    # required until ST4193 (PR #4055)
     - meta_prepend: true
-    - meta_include_prototype: false
+    - match: (?={{)
+      pop: 1
+
+  property-lists:
+    # required until ST4193 (PR #4055)
+    - match: '{{block_start}}'
+      scope: punctuation.section.block.begin.css
+      push: property-list-body
+
+variables:
+  # `{{` starts interpolation, but not two nested CSS blocks
+  block_start: \{(?!{)
+  # allow identifiers to start with {{...}} tags
+  ident_start: (?:{{nmstart}}|{{)

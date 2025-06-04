@@ -1,0 +1,99 @@
+%YAML 1.2
+---
+# A special syntax definition for syntax highlighted tagged template strings
+# with ${...} interpolation support
+scope: text.html.embedded.template-string.ngx
+version: 2
+hidden: true
+
+extends: Packages/HTML/HTML.sublime-syntax
+
+contexts:
+
+###[ HTML CUSTOMIZATIONS ]#####################################################
+
+  main:
+    - include: html
+
+  prototype:
+    - meta_prepend: true
+    - match: (?=\`)
+      pop: 1
+    - include: NgxHTML.sublime-syntax#ng-template-interpolations
+    - include: NgxHTML.sublime-syntax#ng-string-content
+
+  cdata-content:
+    - meta_prepend: true
+    - include: ng-string-prototype
+
+  strings-common-content:
+    - meta_prepend: true
+    - include: ng-string-prototype
+
+  tag-generic-attribute-name:
+    - meta_prepend: true
+    - include: ng-string-prototype
+
+  tag-attribute-value-content:
+    - meta_prepend: true
+    - include: ng-string-prototype
+
+###[ HTML STYLE TAG ]##########################################################
+
+  style-css-content:
+    - meta_include_prototype: false
+    - match: '{{style_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.embedded.template-string.ngx
+      embed_scope: source.css.embedded.html
+      escape: '{{style_content_end}}'
+      escape_captures:
+        1: source.css.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.css.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+###[ HTML STYLE ATTRIBUTES ]###################################################
+
+  tag-style-attribute-value:
+    - meta_include_prototype: false
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.begin.html
+      set: tag-style-attribute-double-quoted-value
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.begin.html
+      set: tag-style-attribute-single-quoted-value
+    - include: else-pop
+
+  tag-style-attribute-double-quoted-value:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+    - match: \"
+      scope: meta.string.html string.quoted.double.html punctuation.definition.string.end.html
+      pop: 1
+    - include: scope:source.css.embedded.template-string.quoted.double.ngx
+      apply_prototype: true
+
+  tag-style-attribute-single-quoted-value:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.string.html meta.interpolation.html source.css.embedded.html
+    - match: \'
+      scope: meta.string.html string.quoted.single.html punctuation.definition.string.end.html
+      pop: 1
+    - include: scope:source.css.embedded.template-string.quoted.single.ngx
+      apply_prototype: true
+
+  ng-string-prototype:
+    - match: (?=\`)
+      pop: 1
+    - include: NgxHTML.sublime-syntax#ng-template-string-interpolations
+    - include: NgxHTML.sublime-syntax#ng-string-content
+
+###############################################################################
+
+variables:
+  # allow tags to start with ${...} interpolation
+  tag_name_start: (?:[A-Za-z]|\$\{)
+

@@ -11,6 +11,6 @@ jobs:
 
       - uses: SublimeText/syntax-test-action@v2
         with:
-          build: 4152
-          default_packages: v4152
+          build: 4180
+          default_packages: binary
           package_name: Ngx HTML
