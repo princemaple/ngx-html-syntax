@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-scope: source.regexp.embedded.ngx.template-string
+scope: source.regexp.embedded.template-string.ngx
 version: 2
 hidden: true
 
@@ -11,4 +11,4 @@ contexts:
   prototype:
     - match: (?=/?`)
       pop: 1
-    - include: NgxHTML.sublime-syntax#ng-template-text-interpolations
+    - include: NgxHTML.sublime-syntax#ng-template-interpolations

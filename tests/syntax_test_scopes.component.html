@@ -538,6 +538,65 @@
 <!--                                  ^ punctuation.section.interpolation.end.ngx - string -->
 <!--                                   ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
 
+  {{ css`color: ${`bs-` + color}` }}
+<!-- ^^^ variable.function.tagged-template.ngx - meta.string -->
+<!--    ^^^^^^^^ meta.string.template.ngx - meta.interpolation -->
+<!--            ^^^^^^^^^^^^^^^^ meta.string.template.ngx meta.interpolation.ngx -->
+<!--                            ^ meta.string.template.ngx - meta.interpolation -->
+<!--                              ^^ - meta.string -->
+<!--    ^ string.quoted.other.ngx punctuation.definition.string.begin.ngx -->
+<!--     ^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.ngx -->
+<!--     ^^^^^ meta.property-name.css support.type.property-name.css -->
+<!--          ^ punctuation.separator.key-value.css -->
+<!--            ^^^^^^^^^^^^^^^^ meta.property-value.css meta.interpolation.ngx -->
+<!--            ^^ punctuation.section.interpolation.begin.ngx -->
+<!--              ^^^^^ meta.string.template.ngx string.quoted.other.ngx -->
+<!--              ^ punctuation.definition.string.begin.ngx -->
+<!--                  ^ punctuation.definition.string.end.ngx -->
+<!--                    ^ keyword.operator.arithmetic.ngx -->
+<!--                      ^^^^^ variable.other.readwrite.ngx -->
+<!--                           ^ punctuation.section.interpolation.end.ngx -->
+<!--                            ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+
+  {{ html`<script>let i = ${value}</script>` }}
+<!-- ^^^^ variable.function.tagged-template.ngx -->
+<!--     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.template.ngx -->
+<!--      ^^^^^^^^ text.html.embedded.ngx meta.tag.script.begin.html -->
+<!--              ^^^^^^^^^^^^^^^^ meta.string.template.ngx text.html.embedded.ngx source.js.embedded.html -->
+<!--                              ^^^^^^^^^ text.html.embedded.ngx meta.tag.script.end.html -->
+<!--                                       ^ punctuation.definition.string.end.ngx -->
+<!--                                         ^^ - meta.string -->
+
+  {{ html`<style>tag {color: ${color}}</style>` }}
+<!-- ^^^^ variable.function.tagged-template.ngx -->
+<!--     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.template.ngx -->
+<!--      ^^^^^^^ text.html.embedded.ngx meta.tag.style.begin.html -->
+<!--             ^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.ngx source.css.embedded.html -->
+<!--                         ^^^^^^^^ meta.interpolation.ngx -->
+<!--                                  ^^^^^^^^ text.html.embedded.ngx meta.tag.style.end.html -->
+<!--                                          ^ punctuation.definition.string.end.ngx -->
+<!--                                           ^^^ - meta.string -->
+
+  <!-- tagged template strings -->
+  {{ html`<p style="color: ${color}">Text \`${var}\`</p>` }}
+<!-- ^^^^ variable.function.tagged-template.ngx - meta.string -->
+<!--     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.template.ngx -->
+<!--     ^ string.quoted.other.ngx punctuation.definition.string.begin.ngx -->
+<!--      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.embedded.ngx -->
+<!--      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!--               ^ meta.attribute-with-value.style.html meta.string.html string.quoted.double.html punctuation.definition.string.begin.html -->
+<!--                ^^^^^^^ meta.attribute-with-value.style.html meta.string.html meta.interpolation.html source.css.embedded.html -->
+<!--                       ^^^^^^^^ meta.attribute-with-value.style.html meta.string.html meta.interpolation.html source.css.embedded.html meta.property-value.css meta.interpolation.ngx -->
+<!--                               ^ meta.attribute-with-value.style.html meta.string.html string.quoted.double.html punctuation.definition.string.end.html -->
+<!--                                      ^^ constant.character.escape.ngx -->
+<!--                                        ^^^^^^ meta.interpolation.ngx - string -->
+<!--                                        ^^ punctuation.section.interpolation.begin.ngx -->
+<!--                                          ^^^ variable.other.readwrite.ngx -->
+<!--                                             ^ punctuation.section.interpolation.end.ngx -->
+<!--                                              ^^ constant.character.escape.ngx -->
+<!--                                                ^^^^ meta.tag -->
+<!--                                                    ^ string.quoted.other.ngx punctuation.definition.string.end.ngx -->
+
   <!-- tagged template strings -->
   {{ tag`Text \`${var}\`` }}
 <!-- ^^^ variable.function.tagged-template.ngx - string -->
