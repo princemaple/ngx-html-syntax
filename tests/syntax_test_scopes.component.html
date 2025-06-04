@@ -655,6 +655,19 @@
 <!--                       ^ punctuation.definition.string.end.ngx -->
 <!--                         ^^ punctuation.section.embedded.end.ngx.html -->
 
+  {{ type = typeof 32 }}
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^^^^^^ keyword.operator.type.ngx -->
+<!--               ^^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+
+
+  {{ type = void 32 }}
+<!-- ^^^^ variable.other.readwrite.ngx -->
+<!--      ^ keyword.operator.assignment.ngx -->
+<!--        ^^^^ keyword.operator.type.ngx -->
+<!--             ^^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+
   <!-- property subscription -->
   {{ person['name'][0] = "Mirabel" }}
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html -->

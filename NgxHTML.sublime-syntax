@@ -564,6 +564,8 @@ contexts:
     - match: \?(?!\.)
       scope: keyword.operator.ternary.ngx
       push: ng-ternary-expression
+    - match: (?:typeof|void){{ident_break}}
+      scope: keyword.operator.type.ngx
 
   ng-ternary-expression:
     - match: ':'
