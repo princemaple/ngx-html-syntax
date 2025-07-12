@@ -552,6 +552,8 @@ contexts:
       scope: punctuation.separator.sequence.ngx
     - match: ';'
       scope: punctuation.terminator.expression.ngx
+    - match: (?:\*\*|&&|\|\||\?\?|[-+*/%])=
+      scope: keyword.operator.assignment.augmented.ngx 
     - match: '[!=]==?|[<>]=?'
       scope: keyword.operator.comparison.ngx
     - match: '\*\*|[-+*/%]'

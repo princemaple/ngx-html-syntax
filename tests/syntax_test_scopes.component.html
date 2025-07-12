@@ -752,7 +752,7 @@
   https://angular.dev/guide/templates/expression-syntax#what-operators-are-supported
   -->
 
-  {{ - + * / % === !== == != = < <= >= > && || ! ?? ** }}
+  {{ - + * / % === !== == != = < <= >= > && || ! ?? ** += -= *= /= &&= ||= ??= **= }}
 <!-- ^ keyword.operator.arithmetic.ngx -->
 <!--   ^ keyword.operator.arithmetic.ngx -->
 <!--     ^ keyword.operator.arithmetic.ngx -->
@@ -772,6 +772,14 @@
 <!--                                           ^ keyword.operator.logical.ngx -->
 <!--                                             ^^ keyword.operator.null-coalescing.ngx -->
 <!--                                                ^^ keyword.operator.arithmetic.ngx -->
+<!--                                                   ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                      ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                         ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                            ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                               ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                                   ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                                       ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                                                                           ^^ keyword.operator.assignment.augmented.ngx -->
 
   <!-- ternary -->
   {{ foo ? bar : baz }}
@@ -1091,6 +1099,62 @@
 <!--                       ^^^ variable.other.readwrite.ngx -->
 <!--                          ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
 <!--                            ^ punctuation.definition.tag.end.html -->
+
+<div (output)="var = exp" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^ meta.directive.on.ngx -->
+<!--         ^ meta.directive.ngx -->
+<!--          ^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.on.begin.ngx -->
+<!--  ^^^^^^ entity.other.attribute-name.on.ngx -->
+<!--        ^ punctuation.definition.on.end.ngx -->
+<!--         ^ punctuation.separator.key-value.ngx -->
+<!--          ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--           ^^^^^^^^^ meta.embedded.expression.ngx source.ngx.embedded.html - string -->
+<!--           ^^^ variable.other.readwrite.ngx -->
+<!--               ^ keyword.operator.assignment.ngx -->
+<!--                 ^^^ variable.other.readwrite.ngx -->
+<!--                    ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                      ^ punctuation.definition.tag.end.html -->
+
+
+<div (output)="var += exp" >
+<!--^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
+<!-- ^^^^^^^^ meta.directive.on.ngx -->
+<!--         ^ meta.directive.ngx -->
+<!--          ^^^^^^^^^^^^ meta.directive.value.ngx meta.string.ngx -->
+<!-- ^ punctuation.definition.on.begin.ngx -->
+<!--  ^^^^^^ entity.other.attribute-name.on.ngx -->
+<!--        ^ punctuation.definition.on.end.ngx -->
+<!--         ^ punctuation.separator.key-value.ngx -->
+<!--          ^ string.quoted.double.ngx punctuation.definition.string.begin.ngx -->
+<!--           ^^^^^^^^^^ meta.embedded.expression.ngx source.ngx.embedded.html - string -->
+<!--           ^^^ variable.other.readwrite.ngx -->
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+<!--                  ^^^ variable.other.readwrite.ngx -->
+<!--                     ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
+<!--                       ^ punctuation.definition.tag.end.html -->
+
+<div (output)="var -= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var *= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var /= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var &&= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var ||= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var ??= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var **= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
 
 <div (@animation.event)="exp + res / ion" >
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
