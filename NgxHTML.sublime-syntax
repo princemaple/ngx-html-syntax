@@ -560,6 +560,8 @@ contexts:
       scope: keyword.operator.arithmetic.ngx
     - match: '&&|\|\||!'
       scope: keyword.operator.logical.ngx
+    - match: '='
+      scope: keyword.operator.assignment.ngx
     - match: \?\?
       scope: keyword.operator.null-coalescing.ngx
     - match: \?(?!\.)
