@@ -1100,6 +1100,33 @@
 <!--                          ^ string.quoted.double.ngx punctuation.definition.string.end.ngx -->
 <!--                            ^ punctuation.definition.tag.end.html -->
 
+<div (output)="var = exp" >
+<!--               ^ keyword.operator.assignment.ngx -->
+
+<div (output)="var += exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var -= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var *= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var /= exp" >
+<!--               ^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var &&= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var ||= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var ??= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
+<div (output)="var **= exp" >
+<!--               ^^^ keyword.operator.assignment.augmented.ngx -->
+
 <div (@animation.event)="exp + res / ion" >
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag -->
 <!-- ^^^^^^^^^^^^^^^^^^ meta.directive.on.ngx -->
