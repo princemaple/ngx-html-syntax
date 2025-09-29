@@ -1,0 +1,7 @@
+{
+  "extensions": [
+    "component.html",
+    "html",
+  ],
+  "auto_fold_angular_imports": false
+}

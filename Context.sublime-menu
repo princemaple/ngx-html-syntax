@@ -1,0 +1,35 @@
+// [
+//   {
+//     "id": "fold-angular-imports",
+//     "caption": "Angular Imports",
+//     "children": [
+//       {
+//         "caption": "Fold Import Statements",
+//         "command": "fold_import_statements"
+//       },
+//       {
+//         "caption": "Fold Import Arrays",
+//         "command": "fold_import_arrays"
+//       },
+//       {
+//         "caption": "Fold All Imports",
+//         "command": "fold_all_imports"
+//       },
+//       {
+//         "caption": "-"
+//       },
+//       {
+//         "caption": "Unfold Import Statements",
+//         "command": "unfold_import_statements"
+//       },
+//       {
+//         "caption": "Unfold Import Arrays",
+//         "command": "unfold_import_arrays"
+//       },
+//       {
+//         "caption": "Unfold All Imports",
+//         "command": "unfold_all_imports"
+//       }
+//     ]
+//   }
+// ]

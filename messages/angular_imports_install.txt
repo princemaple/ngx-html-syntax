@@ -1,0 +1,20 @@
+Angular Imports Folding Feature Added
+====================================
+
+The Ngx HTML Syntax package now includes Angular imports folding functionality!
+
+Features:
+- Optional automatic folding of import statements at the top of .ts files
+- Optional automatic folding of imports arrays in @Component/@Directive decorators
+- Separate commands for folding import statements vs import arrays
+- Opt-in behavior - auto-folding is disabled by default
+
+Settings:
+To enable automatic folding, go to Preferences > Package Settings > NgxHTML > Settings
+and set "auto_fold_angular_imports": true
+
+Commands:
+Use the Command Palette (Ctrl+Shift+P) and search for "Angular Imports" 
+to see all available folding commands.
+
+For more information, see the updated README.md file.

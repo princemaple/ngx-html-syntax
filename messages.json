@@ -1,3 +1,4 @@
 {
-  "install": "messages/install.txt"
+  "install": "messages/install.txt",
+  "1.4.0": "messages/angular_imports_install.txt"
 }

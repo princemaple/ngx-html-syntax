@@ -1,0 +1,33 @@
+[
+    {
+        "caption": "Ngx HTML: Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/Ngx HTML/NgxHTML.sublime-settings"
+        }
+    },
+    {
+        "caption": "Angular Imports: Fold Import Statements",
+        "command": "fold_import_statements"
+    },
+    {
+        "caption": "Angular Imports: Fold Import Arrays",
+        "command": "fold_import_arrays"
+    },
+    {
+        "caption": "Angular Imports: Fold All Imports",
+        "command": "fold_all_imports"
+    },
+    {
+        "caption": "Angular Imports: Unfold Import Statements",
+        "command": "unfold_import_statements"
+    },
+    {
+        "caption": "Angular Imports: Unfold Import Arrays",
+        "command": "unfold_import_arrays"
+    },
+    {
+        "caption": "Angular Imports: Unfold All Imports",
+        "command": "unfold_all_imports"
+    }
+]
