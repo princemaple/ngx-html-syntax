@@ -1372,7 +1372,7 @@
  -->
 
   {{ [first, ...rest, last] }}
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^ meta.sequence.array.ngx -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^ meta.sequence.array.ngx -->
 <!-- ^ punctuation.section.sequence.begin.ngx -->
 <!--  ^^^^^ variable.other.readwrite.ngx -->
 <!--       ^ punctuation.separator.sequence.ngx -->
@@ -1383,9 +1383,9 @@
 <!--                      ^ punctuation.section.sequence.end.ngx -->
 
   {{ [...items] }}
-<!-- ^^^^^^^^^ meta.sequence.array.ngx -->
-<!-- ^^^ keyword.operator.spread.ngx -->
-<!--    ^^^^^ variable.other.readwrite.ngx -->
+<!-- ^^^^^^^^^^ meta.sequence.array.ngx -->
+<!--  ^^^ keyword.operator.spread.ngx -->
+<!--     ^^^^^ variable.other.readwrite.ngx -->
 
 
 <!--
@@ -1394,7 +1394,7 @@
 
   {{ { a: 1, ...obj, b: 2 } }}
 <!-- ^ punctuation.section.mapping.begin.ngx -->
-<!-- ^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.ngx -->
+<!-- ^^ meta.mapping.ngx -->
 <!--   ^ meta.mapping.key.ngx meta.string.ngx string.unquoted.ngx -->
 <!--    ^ punctuation.separator.mapping.key-value.ngx -->
 <!--      ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
@@ -1408,7 +1408,7 @@
 <!--                      ^ punctuation.section.mapping.end.ngx -->
 
   {{ { ...defaults } }}
-<!-- ^^^^^^^^^^^^^^^ meta.mapping.ngx -->
+<!-- ^^ meta.mapping.ngx -->
 <!--   ^^^ keyword.operator.spread.ngx -->
 <!--      ^^^^^^^^ variable.other.readwrite.ngx -->
 
