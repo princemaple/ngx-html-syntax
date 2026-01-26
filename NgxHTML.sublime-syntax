@@ -441,6 +441,7 @@ contexts:
     - match: \]
       scope: punctuation.section.sequence.end.ngx
       pop: 1
+    - include: ng-spread
     - include: ng-expressions
 
 ###[ ANGULAR GROUPS ]##########################################################
@@ -474,6 +475,7 @@ contexts:
     - match: ':'
       scope: meta.mapping.ngx punctuation.separator.mapping.key-value.ngx
       set: ng-object-value
+    - include: ng-spread
     - match: (?=\S)
       set: ng-object-key
 
@@ -542,7 +544,14 @@ contexts:
       pop: 1
     - match: ','
       scope: punctuation.separator.arguments.ngx
+    - include: ng-spread
     - include: ng-expressions
+
+###[ ANGULAR SPREAD ]##########################################################
+
+  ng-spread:
+    - match: \.\.\.
+      scope: keyword.operator.spread.ngx
 
 ###[ ANGULAR OPERATORS ]#######################################################
 
