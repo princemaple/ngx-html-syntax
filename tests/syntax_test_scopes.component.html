@@ -1372,21 +1372,20 @@
  -->
 
   {{ [first, ...rest, last] }}
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html -->
-<!--  ^^^^^^^^^^^^^^^^^^^^^ meta.sequence.array.ngx -->
-<!--  ^ punctuation.section.sequence.begin.ngx -->
-<!--   ^^^^^ variable.other.readwrite.ngx -->
-<!--        ^ punctuation.separator.sequence.ngx -->
-<!--          ^^^ keyword.operator.spread.ngx -->
-<!--             ^^^^ variable.other.readwrite.ngx -->
-<!--                 ^ punctuation.separator.sequence.ngx -->
-<!--                   ^^^^ variable.other.readwrite.ngx -->
-<!--                       ^ punctuation.section.sequence.end.ngx -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^ meta.sequence.array.ngx -->
+<!-- ^ punctuation.section.sequence.begin.ngx -->
+<!--  ^^^^^ variable.other.readwrite.ngx -->
+<!--       ^ punctuation.separator.sequence.ngx -->
+<!--         ^^^ keyword.operator.spread.ngx -->
+<!--            ^^^^ variable.other.readwrite.ngx -->
+<!--                ^ punctuation.separator.sequence.ngx -->
+<!--                  ^^^^ variable.other.readwrite.ngx -->
+<!--                      ^ punctuation.section.sequence.end.ngx -->
 
   {{ [...items] }}
 <!-- ^^^^^^^^^ meta.sequence.array.ngx -->
-<!--  ^^^ keyword.operator.spread.ngx -->
-<!--     ^^^^^ variable.other.readwrite.ngx -->
+<!-- ^^^ keyword.operator.spread.ngx -->
+<!--    ^^^^^ variable.other.readwrite.ngx -->
 
 
 <!--
@@ -1394,23 +1393,22 @@
  -->
 
   {{ { a: 1, ...obj, b: 2 } }}
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html -->
-<!--  ^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.ngx -->
 <!--  ^ punctuation.section.mapping.begin.ngx -->
+<!--   ^^^^^^^^^^^^^^^^^^^^^ meta.mapping.ngx -->
 <!--    ^ meta.mapping.key.ngx meta.string.ngx string.unquoted.ngx -->
 <!--     ^ punctuation.separator.mapping.key-value.ngx -->
-<!--       ^ meta.mapping.value.ngx meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--       ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
 <!--        ^ punctuation.separator.mapping.pair.ngx -->
 <!--          ^^^ keyword.operator.spread.ngx -->
 <!--             ^^^ variable.other.readwrite.ngx -->
 <!--                ^ punctuation.separator.mapping.pair.ngx -->
 <!--                  ^ meta.mapping.key.ngx meta.string.ngx string.unquoted.ngx -->
 <!--                   ^ punctuation.separator.mapping.key-value.ngx -->
-<!--                     ^ meta.mapping.value.ngx meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
+<!--                     ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
 <!--                       ^ punctuation.section.mapping.end.ngx -->
 
   {{ { ...defaults } }}
-<!-- ^^^^^^^^^^^^^^ meta.mapping.ngx -->
+<!--  ^^^^^^^^^^^^^^ meta.mapping.ngx -->
 <!--   ^^^ keyword.operator.spread.ngx -->
 <!--      ^^^^^^^^ variable.other.readwrite.ngx -->
 
@@ -1420,35 +1418,36 @@
  -->
 
   {{ func(a, b, ...args) }}
-<!-- ^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html source.ngx.embedded.html -->
-<!--  ^^^^ meta.function-call.identifier.ngx variable.function.ngx -->
-<!--      ^^^^^^^^^^^^^^ meta.function-call.arguments.ngx -->
-<!--      ^ punctuation.section.arguments.begin.ngx -->
-<!--       ^ variable.other.readwrite.ngx -->
-<!--        ^ punctuation.separator.arguments.ngx -->
-<!--          ^ variable.other.readwrite.ngx -->
-<!--           ^ punctuation.separator.arguments.ngx -->
-<!--             ^^^ keyword.operator.spread.ngx -->
-<!--                ^^^^ variable.other.readwrite.ngx -->
-<!--                    ^ punctuation.section.arguments.end.ngx -->
+<!-- ^^^^ meta.function-call.identifier.ngx variable.function.ngx -->
+<!--     ^^^^^^^^^^^^^^^ meta.function-call.arguments.ngx -->
+<!--     ^ punctuation.section.arguments.begin.ngx -->
+<!--      ^ variable.other.readwrite.ngx -->
+<!--       ^ punctuation.separator.arguments.ngx -->
+<!--         ^ variable.other.readwrite.ngx -->
+<!--          ^ punctuation.separator.arguments.ngx -->
+<!--            ^^^ keyword.operator.spread.ngx -->
+<!--               ^^^^ variable.other.readwrite.ngx -->
+<!--                   ^ punctuation.section.arguments.end.ngx -->
 
   {{ call(...items) }}
-<!-- ^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html source.ngx.embedded.html -->
-<!--  ^^^^ meta.function-call.identifier.ngx variable.function.ngx -->
-<!--      ^^^^^^^^^ meta.function-call.arguments.ngx -->
-<!--       ^^^ keyword.operator.spread.ngx -->
-<!--          ^^^^^ variable.other.readwrite.ngx -->
+<!-- ^^^^ meta.function-call.identifier.ngx variable.function.ngx -->
+<!--     ^^^^^^^^^ meta.function-call.arguments.ngx -->
+<!--     ^ punctuation.section.arguments.begin.ngx -->
+<!--      ^^^ keyword.operator.spread.ngx -->
+<!--         ^^^^^ variable.other.readwrite.ngx -->
+<!--              ^ punctuation.section.arguments.end.ngx -->
 
   {{ obj.method(first, ...rest) }}
-<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html source.ngx.embedded.html -->
-<!--  ^^^ variable.other.object.ngx -->
-<!--     ^ punctuation.accessor.ngx -->
-<!--      ^^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
-<!--            ^^^^^^^^^^^^^^^ meta.function-call.arguments.ngx -->
-<!--             ^^^^^ variable.other.readwrite.ngx -->
-<!--                  ^ punctuation.separator.arguments.ngx -->
-<!--                    ^^^ keyword.operator.spread.ngx -->
-<!--                       ^^^^ variable.other.readwrite.ngx -->
+<!-- ^^^ variable.other.object.ngx -->
+<!--    ^ punctuation.accessor.ngx -->
+<!--     ^^^^^^ meta.function-call.identifier.ngx variable.function.method.ngx -->
+<!--           ^^^^^^^^^^^^^^^^ meta.function-call.arguments.ngx -->
+<!--           ^ punctuation.section.arguments.begin.ngx -->
+<!--            ^^^^^ variable.other.readwrite.ngx -->
+<!--                 ^ punctuation.separator.arguments.ngx -->
+<!--                   ^^^ keyword.operator.spread.ngx -->
+<!--                      ^^^^ variable.other.readwrite.ngx -->
+<!--                          ^ punctuation.section.arguments.end.ngx -->
 
 
 <!--
@@ -1457,46 +1456,43 @@
  -->
 
 @switch (cond) {
-<!--^^^^^^^^^^^^ meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--            ^^ meta.block.ngx -->
+<!-- <- keyword.control.conditional.switch.ngx punctuation.definition.keyword.ngx -->
+<!--^^^ keyword.control.conditional.switch.ngx -->
+<!--    ^^^^^^ meta.group.ngx -->
+<!--           ^ meta.block.ngx punctuation.section.block.begin.ngx -->
     @case (1)
-<!--^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--^^^^^ keyword.control.conditional.case.ngx -->
+<!--^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
 <!--      ^^^ meta.group.ngx -->
 <!--      ^ punctuation.section.group.begin.ngx -->
 <!--       ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
 <!--        ^ punctuation.section.group.end.ngx -->
     @case (2)
-<!--^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--^^^^^ keyword.control.conditional.case.ngx -->
+<!--^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
 <!--      ^^^ meta.group.ngx -->
 <!--       ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
     @case (3) {
-<!--^^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--^^^^^ keyword.control.conditional.case.ngx -->
+<!--^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.case.ngx -->
 <!--^ punctuation.definition.keyword.ngx -->
 <!--      ^^^ meta.group.ngx -->
 <!--       ^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
-<!--          ^ meta.block.ngx punctuation.section.block.begin.ngx -->
+<!--          ^ meta.block.ngx meta.block.ngx punctuation.section.block.begin.ngx -->
         <span>1, 2 or 3</span>
-<!--^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.ngx meta.block.ngx -->
+<!--^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.ngx meta.block.ngx -->
     }
 <!--^ meta.block.ngx meta.block.ngx punctuation.section.block.end.ngx -->
 
     @case (4) {
-<!--^^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--^^^^^ keyword.control.conditional.case.ngx -->
-<!--          ^ meta.block.ngx punctuation.section.block.begin.ngx -->
+<!--^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.case.ngx -->
+<!--          ^ meta.block.ngx meta.block.ngx punctuation.section.block.begin.ngx -->
         4
     }
 <!--^ meta.block.ngx meta.block.ngx punctuation.section.block.end.ngx -->
 
     @default {
-<!--^^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html -->
-<!--^^^^^^^^ keyword.control.conditional.case.ngx -->
-<!--         ^ meta.block.ngx punctuation.section.block.begin.ngx -->
+<!--^^^^^^^^ meta.block.ngx meta.embedded.statement.ngx.html source.ngx.embedded.html keyword.control.conditional.case.ngx -->
+<!--         ^ meta.block.ngx meta.block.ngx punctuation.section.block.begin.ngx -->
         ...?
     }
 <!--^ meta.block.ngx meta.block.ngx punctuation.section.block.end.ngx -->
