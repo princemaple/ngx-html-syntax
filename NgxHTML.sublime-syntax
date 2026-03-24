@@ -486,11 +486,10 @@ contexts:
       fail: ng-arrow-params
 
   ng-after-arrow-params:
-    - match: \s*(=>)
-      captures:
-        1: keyword.declaration.function.arrow.ngx
+    - match: '=>'
+      scope: keyword.declaration.function.arrow.ngx
       pop: 1
-    - match: ''
+    - match: (?=\S)
       fail: ng-arrow-params
 
 ###[ ANGULAR OBJECTS ]#########################################################
