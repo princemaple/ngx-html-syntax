@@ -561,6 +561,8 @@ contexts:
       scope: punctuation.separator.sequence.ngx
     - match: ';'
       scope: punctuation.terminator.expression.ngx
+    - match: '=>'
+      scope: keyword.operator.assignment.arrow.ngx
     - match: (?:\*\*|&&|\|\||\?\?|[-+*/%])=
       scope: keyword.operator.assignment.augmented.ngx 
     - match: '[!=]==?|[<>]=?'
@@ -578,7 +580,7 @@ contexts:
       push: ng-ternary-expression
     - match: in{{ident_break}}
       scope: keyword.operator.comparison.ngx
-    - match: (?:typeof|void){{ident_break}}
+    - match: (?:typeof|void|instanceof){{ident_break}}
       scope: keyword.operator.type.ngx
 
   ng-ternary-expression:

@@ -823,6 +823,33 @@
 <!--        ^^^^ keyword.operator.type.ngx -->
 <!--             ^^ meta.number.integer.decimal.ngx constant.numeric.value.ngx -->
 
+  {{ obj instanceof SomeClass }}
+<!-- ^^^ variable.other.readwrite.ngx -->
+<!--     ^^^^^^^^^^ keyword.operator.type.ngx -->
+<!--                ^^^^^^^^^ variable.other.readwrite.ngx -->
+
+  <!-- arrow functions -->
+  {{ (x) => x * 2 }}
+<!-- ^ punctuation.section.group.begin.ngx -->
+<!--  ^ variable.other.readwrite.ngx -->
+<!--   ^ punctuation.section.group.end.ngx -->
+<!--     ^^ keyword.operator.assignment.arrow.ngx -->
+<!--        ^ variable.other.readwrite.ngx -->
+<!--          ^ keyword.operator.arithmetic.ngx -->
+
+  {{ items.filter(item => item.active) }}
+<!-- ^^^^^ variable.other.object.ngx -->
+<!--      ^ punctuation.accessor.ngx -->
+<!--       ^^^^^^ variable.function.method.ngx -->
+<!--             ^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.ngx -->
+<!--             ^ punctuation.section.arguments.begin.ngx -->
+<!--              ^^^^ variable.other.readwrite.ngx -->
+<!--                   ^^ keyword.operator.assignment.arrow.ngx -->
+<!--                      ^^^^ variable.other.object.ngx -->
+<!--                          ^ punctuation.accessor.ngx -->
+<!--                           ^^^^^^ variable.other.member.ngx -->
+<!--                                 ^ punctuation.section.arguments.end.ngx -->
+
   <!-- property subscription -->
   {{ person['name'][0] = "Mirabel" }}
 <!--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.expression.ngx.html -->
