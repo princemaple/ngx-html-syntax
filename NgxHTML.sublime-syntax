@@ -418,6 +418,7 @@ contexts:
   ng-expressions:
     # https://angular.dev/guide/templates/expression-syntax
     - include: ng-arrays
+    - include: ng-arrow-functions
     - include: ng-groups
     - include: ng-objects
     - include: ng-function-calls
@@ -457,6 +458,39 @@ contexts:
       scope: punctuation.section.group.end.ngx
       pop: 1
     - include: ng-expressions
+
+###[ ANGULAR ARROW FUNCTIONS ]#################################################
+
+  ng-arrow-functions:
+    # single param without parens: x =>
+    - match: '{{ident_name}}(?=\s*=>)'
+      scope: variable.parameter.ngx
+    # grouped params: (x) => or (x, y) =>
+    - match: \(
+      scope: punctuation.section.group.begin.ngx
+      branch_point: ng-arrow-params
+      branch:
+        - ng-arrow-params-body
+        - ng-group-body
+
+  ng-arrow-params-body:
+    - meta_scope: meta.group.ngx
+    - match: \)
+      scope: punctuation.section.group.end.ngx
+      set: ng-after-arrow-params
+    - match: ','
+      scope: punctuation.separator.parameters.ngx
+    - match: '{{ident_name}}'
+      scope: variable.parameter.ngx
+    - match: (?=\S)
+      fail: ng-arrow-params
+
+  ng-after-arrow-params:
+    - match: '=>'
+      scope: keyword.declaration.function.arrow.ngx
+      pop: 1
+    - match: (?=\S)
+      fail: ng-arrow-params
 
 ###[ ANGULAR OBJECTS ]#########################################################
 
@@ -561,6 +595,8 @@ contexts:
       scope: punctuation.separator.sequence.ngx
     - match: ';'
       scope: punctuation.terminator.expression.ngx
+    - match: '=>'
+      scope: keyword.declaration.function.arrow.ngx
     - match: (?:\*\*|&&|\|\||\?\?|[-+*/%])=
       scope: keyword.operator.assignment.augmented.ngx 
     - match: '[!=]==?|[<>]=?'
@@ -578,7 +614,7 @@ contexts:
       push: ng-ternary-expression
     - match: in{{ident_break}}
       scope: keyword.operator.comparison.ngx
-    - match: (?:typeof|void){{ident_break}}
+    - match: (?:typeof|void|instanceof){{ident_break}}
       scope: keyword.operator.type.ngx
 
   ng-ternary-expression:
